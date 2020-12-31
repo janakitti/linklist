@@ -1,6 +1,9 @@
 import styled from 'styled-components';
 import WelcomeLayout from '../components/welcome-layout';
 import {useState} from "react";
+import axios from 'axios';
+
+import API from '../utils/API';
 
 export default function SignUp() {
 
@@ -17,27 +20,21 @@ export default function SignUp() {
         console.log(user);
     }
 
-    function createUser(event) {
-        fetch("http://localhost:4000/api/users", {
-            crossDomain: true,
-            "method": "POST",
-            "headers": {
-                "content-type": "application/json",
-                "accept": "application/json"
-            },
-            "body": JSON.stringify({
-                username: user.username,
-                email: user.email,
-                password: user.password
-            })
-            })
-            .then(response => response.json())
-            .then(response => {
-            console.log(response)
-            })
-            .catch(err => {
-            console.log(err);
-        });
+    async function handleSubmit(event) {
+        event.preventDefault();
+
+        const newUser = {
+            username: user.username,
+            email: user.email,
+            password: user.password
+        };
+
+        try {
+            const response = await axios.post('http://localhost:4000/api/users/', newUser);
+            console.log(response);
+        } catch (ex) {
+            console.log(ex);
+        }
     }
 
     return (
@@ -49,13 +46,14 @@ export default function SignUp() {
                 <Subtitle>
                     Sign up for better bookmarking
                 </Subtitle>
-                <form>
+                <form onSubmit={handleSubmit}>
                     <Input type="text" name="username" placeholder="Username" value={user.username} onChange={handleChange}></Input>
                     <Input type="email" name="email" placeholder="Email" value={user.email} onChange={handleChange}></Input>
                     <Input type="password" name="password" placeholder="Password" value={user.password} onChange={handleChange}></Input>
                     <Input type="password" name="passwordConfirm" placeholder="Confirm password" value={user.passwordConfirm} onChange={handleChange}></Input>
+                    <Button type="submit">Sign up</Button>
                 </form>
-                <Button name="signUp" onClick={createUser}>Sign up</Button>
+                
             </Container>
         </WelcomeLayout>
     )
