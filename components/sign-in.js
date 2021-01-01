@@ -1,17 +1,13 @@
 import styled from 'styled-components';
-import WelcomeLayout from '../components/welcome-layout';
+import WelcomeLayout from './welcome-layout';
 import {useState} from "react";
 import axios from 'axios';
 
-import API from '../utils/API';
-
-export default function SignUp() {
+export default function SignIn() {
 
     const [user, setUser] = useState({
-        username: '',
         email: '',
         password: '',
-        passwordConfirm: ''
     });
     
     function handleChange(event) {
@@ -22,19 +18,6 @@ export default function SignUp() {
 
     async function handleSubmit(event) {
         event.preventDefault();
-
-        const newUser = {
-            username: user.username,
-            email: user.email,
-            password: user.password
-        };
-
-        try {
-            const response = await axios.post('http://localhost:4000/api/users/', newUser);
-            console.log(response);
-        } catch (ex) {
-            console.log(ex);
-        }
     }
 
     return (
@@ -44,16 +27,13 @@ export default function SignUp() {
                     linklist
                 </Title>
                 <Subtitle>
-                    Sign up for better bookmarking
+                    Sign in for better bookmarking
                 </Subtitle>
                 <form onSubmit={handleSubmit}>
-                    <Input type="text" name="username" placeholder="Username" value={user.username} onChange={handleChange}></Input>
                     <Input type="email" name="email" placeholder="Email" value={user.email} onChange={handleChange}></Input>
                     <Input type="password" name="password" placeholder="Password" value={user.password} onChange={handleChange}></Input>
-                    <Input type="password" name="passwordConfirm" placeholder="Confirm password" value={user.passwordConfirm} onChange={handleChange}></Input>
-                    <Button type="submit">Sign up</Button>
+                    <Button type="submit">Sign in</Button>
                 </form>
-                
             </Container>
         </WelcomeLayout>
     )

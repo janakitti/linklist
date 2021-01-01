@@ -6,14 +6,14 @@ import Col from 'react-bootstrap/Col';
 const WelcomeLayout = (props) => (
 
         <WelcomeContainer>
-            <Row>
+            <WelcomeRow>
                 <Col>
                 Hello
                 </Col>
                 <PanelCol>
                     { props.children }
                 </PanelCol>
-            </Row>
+            </WelcomeRow>
         </WelcomeContainer>
 
     
@@ -29,5 +29,10 @@ const PanelCol = styled(Col)`
     justify-content: center;
     align-items: center;
 `;
+
+const WelcomeRow = styled(Row)`
+    height: 100%;
+`;
+
 
 export default WelcomeLayout;

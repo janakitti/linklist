@@ -1,7 +1,12 @@
 import Head from 'next/head'
 import styles from '../styles/Home.module.css'
+import {useState} from "react";
+import SignIn from '../components/sign-in';
+import SignUp from '../components/sign-up';
 
 export default function Home() {
+  const [state, setState] = useState("SignUp");
+
   return (
     // <div className={styles.container}>
     //   <Head>
@@ -23,11 +28,16 @@ export default function Home() {
     //   </footer>
     // </div>
 
-    <WelcomeLayout>
-      <div>
-        Hello
-      </div>
-    </WelcomeLayout>
+    <div>
+      {
+        {
+          SignIn: <SignIn setState={setState} />,
+          SignUp: <SignUp setState={setState} />
+        }[state]
+      }
+      
+    </div>
+      
 
   )
 }
