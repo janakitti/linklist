@@ -52,17 +52,31 @@ const SignUp = ({setState}) => {
                     <Input type="password" name="passwordConfirm" placeholder="Confirm password" value={user.passwordConfirm} onChange={handleChange}></Input>
                     <Button type="submit">Sign up</Button>
                 </form>
-                
+                <Info>Already have an account? <b onClick={() => setState("SignIn")}>Sign in</b></Info>
             </Container>
         </WelcomeLayout>
     )
 }
 
+const Info = styled.p`
+    margin: 2em 0 0 0;
+
+    font-family: Poppins;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 14px;
+    line-height: 21px;
+    text-align: center;
+
+    color: #767676;
+
+    cursor: pointer;
+`;
+
 const Container = styled.div`
     position: relative;
     align-items: center;
     text-align: center;
-    top: -10em;
 `;
 
 const Title = styled.h1`

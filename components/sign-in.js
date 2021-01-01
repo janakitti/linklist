@@ -2,9 +2,10 @@ import styled from 'styled-components';
 import WelcomeLayout from './welcome-layout';
 import {useState} from "react";
 import axios from 'axios';
+import { Router, useRouter } from "next/router";
 
-export default function SignIn() {
-
+const SignIn = ({setState}) => {
+    const router = useRouter();
     const [user, setUser] = useState({
         email: '',
         password: '',
@@ -18,6 +19,18 @@ export default function SignIn() {
 
     async function handleSubmit(event) {
         event.preventDefault();
+
+        const creds = {
+            email: user.email,
+            password: user.password
+        };
+
+        try {
+            const response = await axios.post('http://localhost:4000/api/auth/', creds);
+            router.push("/links");
+        } catch (ex) {
+            console.log(ex);
+        }
     }
 
     return (
@@ -34,16 +47,31 @@ export default function SignIn() {
                     <Input type="password" name="password" placeholder="Password" value={user.password} onChange={handleChange}></Input>
                     <Button type="submit">Sign in</Button>
                 </form>
+                <Info>Don't have an account? <b onClick={() => setState("SignUp")}>Sign up</b></Info>
             </Container>
         </WelcomeLayout>
     )
 }
 
+const Info = styled.p`
+    margin: 2em 0 0 0;
+
+    font-family: Poppins;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 14px;
+    line-height: 21px;
+    text-align: center;
+
+    color: #767676;
+
+    cursor: pointer;
+`;
+
 const Container = styled.div`
     position: relative;
     align-items: center;
     text-align: center;
-    top: -10em;
 `;
 
 const Title = styled.h1`
@@ -89,3 +117,5 @@ const Button = styled.button`
     font-weight: 300;
     font-size: 1em;
 `;
+
+export default SignIn;

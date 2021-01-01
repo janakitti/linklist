@@ -5,23 +5,19 @@ import Col from 'react-bootstrap/Col';
 
 const WelcomeLayout = (props) => (
 
-        <WelcomeContainer>
+
             <WelcomeRow>
-                <Col>
+                <Col className="d-none d-lg-block" lg={6}>
                 Hello
                 </Col>
-                <PanelCol>
+                <PanelCol xs={12} lg={6}>
                     { props.children }
                 </PanelCol>
             </WelcomeRow>
-        </WelcomeContainer>
+
 
     
 );
-
-
-const WelcomeContainer = styled(Container)`
-`;
 
 const PanelCol = styled(Col)`
     background-color: #f2f2f2;
@@ -32,6 +28,8 @@ const PanelCol = styled(Col)`
 
 const WelcomeRow = styled(Row)`
     height: 100%;
+    width: 100%;
+    margin: 0;
 `;
 
 
