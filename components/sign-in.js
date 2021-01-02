@@ -26,7 +26,9 @@ const SignIn = ({setState}) => {
         };
 
         try {
-            const response = await axios.post('http://localhost:4000/api/auth/', creds);
+            await axios.post('http://localhost:4000/api/auth/', creds, {
+                withCredentials: true
+            });
             router.push("/links");
         } catch (ex) {
             console.log(ex);
