@@ -2,6 +2,7 @@ import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import ListsPanel from '../components/lists-panel';
+import LinksWindow from "../components/links-window";
 import styled from "styled-components";
 import {useEffect, useState} from "react";
 
@@ -12,7 +13,7 @@ export default function Links() {
         listsIds: ['o']
     });
 
-    const [lists, setLists] = useState([1,2]);
+    const [lists, setLists] = useState([]);
 
     const [selected, setSelected] = useState("");
 
@@ -47,10 +48,10 @@ export default function Links() {
     return(
         <FullRow>
             <FullCol xs={3}>
-                <ListsPanel username={user.username} lists={lists} handleSelect={handleSelect}/>
+                <ListsPanel username={user.username} lists={lists} handleSelect={handleSelect} selected={selected}/>
             </FullCol>
             <FullCol xs={9}>
-                {selected}
+                <LinksWindow selected={selected}/>
             </FullCol>
         </FullRow>
     )

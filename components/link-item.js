@@ -1,14 +1,10 @@
 import styled from 'styled-components';
-import { useEffect, useState } from 'react';
 
-const ListItem = ({_id, name, handleSelect, selected}) => {
-    const toggleSelected = () => {
-        handleSelect(_id);
-    }
+const LinkItem = ({_id, label, url}) => {
 
     return (
-        <Item onClick={toggleSelected} selected={selected === _id}>
-            {name}
+        <Item>
+            {label}
         </Item>
     )
 };
@@ -31,10 +27,6 @@ const Item = styled.div`
     
     color: white;
     font-family: Poppins;
-    
-    ${({ selected }) => selected && `
-        background: #DEC800;
-    `}
 `;
 
-export default ListItem;
+export default LinkItem;

@@ -5,10 +5,10 @@ import ListItem from './list-item';
 import Row from 'react-bootstrap/Row';
 import Grid from '@material-ui/core/Grid';
 
-const ListsPanel = ({username, lists, handleSelect}) => {
+const ListsPanel = ({username, lists, handleSelect, selected}) => {
 
 
-    const listItems = lists.map((list, idx) => <ListItem key={idx} _id={list._id} name={list.name} handleSelect={handleSelect}/>);
+    const listItems = lists.map((list, idx) => <ListItem key={idx} _id={list._id} name={list.name} handleSelect={handleSelect} selected={selected} />);
 
     return(
         <Panel>
