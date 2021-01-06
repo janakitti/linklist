@@ -5,31 +5,15 @@ import ListItem from './list-item';
 import Row from 'react-bootstrap/Row';
 import Grid from '@material-ui/core/Grid';
 
-export default function ListsPanel() {
-    const [user, setUser] = useState({
-        username: "",
-        email: "",
-        lists: ['o']
-    });
+const ListsPanel = ({username, lists, handleSelect}) => {
 
-    const listItems = user.lists.map((list, idx) => <ListItem key={idx} name={list} />);
 
-    useEffect(async () => {
-        fetch('user-data.json', {
-            headers : { 
-                'Content-Type': 'application/json',
-                'Accept': 'application/json'
-            }
-        })
-        .then(res => res.json())
-        .then(data => setUser(data))
-        .catch(ex => console.log(ex));
-    }, []);
+    const listItems = lists.map((list, idx) => <ListItem key={idx} _id={list._id} name={list.name} handleSelect={handleSelect}/>);
 
     return(
         <Panel>
                 <Profile>
-                    <Name>{user.username}</Name>
+                    <Name>{username}</Name>
                 </Profile>
                 <div>
                     {listItems}
@@ -56,3 +40,5 @@ const Name = styled.h1`
     font-weight: 700;
     font-size: 2em;
 `;
+
+export default ListsPanel;

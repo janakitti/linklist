@@ -1,10 +1,19 @@
 import styled from 'styled-components';
+import { useEffect, useState } from 'react';
 
-const ListItem = ({name}) => (
-    <Item>
-        {name}
-    </Item>
-);
+const ListItem = ({_id, name, handleSelect}) => {
+    const [selected, setSelected] = useState(false);
+
+    const toggleSelected = () => {
+        handleSelect(_id);
+    }
+
+    return (
+        <Item onClick={toggleSelected}>
+            {name}
+        </Item>
+    )
+};
 
 const Item = styled.div`
     width: 100%;
