@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react';
 import axios from 'axios';
 import ListItem from './list-item';
 import Row from 'react-bootstrap/Row';
+import Grid from '@material-ui/core/Grid';
 
 export default function ListsPanel() {
     const [user, setUser] = useState({
@@ -27,25 +28,27 @@ export default function ListsPanel() {
 
     return(
         <Panel>
-            <Row>
-                <Name>{user.username}</Name>
-            </Row>
-            <Row>
+                <Profile>
+                    <Name>{user.username}</Name>
+                </Profile>
                 <div>
                     {listItems}
                 </div>
-            </Row>   
         </Panel>
     )
 }
+
+const Profile = styled.div`
+    display: flex;  
+    justify-content: center;
+    
+    padding: 3em 0;
+`;
 
 const Panel = styled.div`
     background-color: #f2f2f2;
     height: 100%;
     padding: 3em 2em;
-    display: flex;
-    justify-content: center;
-    
 `;
 
 const Name = styled.h1`
