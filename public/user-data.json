@@ -1,0 +1,10 @@
+{
+    "_id": "0",
+    "username": "Janakitti",
+    "email": "hello@janakitti.com",
+    "password": "qwerty",
+    "lists": [
+        "0",
+        "1"
+    ]
+}
