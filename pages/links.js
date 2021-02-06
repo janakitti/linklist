@@ -14,8 +14,6 @@ export default function Links() {
     listsIds: ["o"],
   });
 
-  const [lists, setLists] = useState([]);
-
   const [selected, setSelected] = useState("");
 
   useEffect(async () => {
@@ -30,30 +28,13 @@ export default function Links() {
     }
   }, []);
 
-  useEffect(async () => {
-    try {
-      const res = await axios.get("http://localhost:4000/api/lists", {
-        method: "get",
-        withCredentials: true,
-      });
-      setLists(res.data);
-    } catch (ex) {
-      console.log(ex);
-    }
-  }, [user.listIds]);
-
   const handleSelect = (id) => {
     setSelected(id);
   };
 
   return (
     <FullRow>
-      <ListsPanel
-        username={user.username}
-        lists={lists}
-        handleSelect={handleSelect}
-        selected={selected}
-      />
+      <ListsPanel user={user} handleSelect={handleSelect} selected={selected} />
       <LinksWindow selected={selected} />
     </FullRow>
   );
