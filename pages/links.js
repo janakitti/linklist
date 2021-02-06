@@ -48,17 +48,13 @@ export default function Links() {
 
   return (
     <FullRow>
-      <FullCol xs={3}>
-        <ListsPanel
-          username={user.username}
-          lists={lists}
-          handleSelect={handleSelect}
-          selected={selected}
-        />
-      </FullCol>
-      <FullCol xs={9}>
-        <LinksWindow selected={selected} />
-      </FullCol>
+      <ListsPanel
+        username={user.username}
+        lists={lists}
+        handleSelect={handleSelect}
+        selected={selected}
+      />
+      <LinksWindow selected={selected} />
     </FullRow>
   );
 }

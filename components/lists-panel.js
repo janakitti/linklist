@@ -1,44 +1,50 @@
 import styled from "styled-components";
-import { useEffect, useState } from 'react';
-import axios from 'axios';
-import ListItem from './list-item';
-import Row from 'react-bootstrap/Row';
-import Grid from '@material-ui/core/Grid';
+import { useEffect, useState } from "react";
+import axios from "axios";
+import ListItem from "./list-item";
+import Row from "react-bootstrap/Row";
+import Grid from "@material-ui/core/Grid";
 
-const ListsPanel = ({username, lists, handleSelect, selected}) => {
+const ListsPanel = ({ username, lists, handleSelect, selected }) => {
+  const listItems = lists.map((list, idx) => (
+    <ListItem
+      key={idx}
+      _id={list._id}
+      name={list.name}
+      handleSelect={handleSelect}
+      selected={selected}
+    />
+  ));
 
-
-    const listItems = lists.map((list, idx) => <ListItem key={idx} _id={list._id} name={list.name} handleSelect={handleSelect} selected={selected} />);
-
-    return(
-        <Panel>
-                <Profile>
-                    <Name>{username}</Name>
-                </Profile>
-                <div>
-                    {listItems}
-                </div>
-        </Panel>
-    )
-}
+  return (
+    <Panel>
+      <Profile>
+        <Name>{username}</Name>
+      </Profile>
+      <div>{listItems}</div>
+    </Panel>
+  );
+};
 
 const Profile = styled.div`
-    display: flex;  
-    justify-content: center;
-    
-    padding: 3em 0;
+  display: flex;
+  justify-content: center;
+
+  padding: 3em 0;
 `;
 
 const Panel = styled.div`
-    background-color: #f2f2f2;
-    height: 100%;
-    padding: 3em 2em;
+  background-color: #f2f2f2;
+  height: 100%;
+  width: 20em;
+  padding: 3em 2em;
+  position: fixed;
 `;
 
 const Name = styled.h1`
-    font-family: Poppins;
-    font-weight: 700;
-    font-size: 2em;
+  font-family: Poppins;
+  font-weight: 700;
+  font-size: 2em;
 `;
 
 export default ListsPanel;

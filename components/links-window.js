@@ -59,24 +59,22 @@ const LinksWindow = ({ selected }) => {
   return (
     <Window>
       {linkItems}
-      <NewLinkContainer>
-        <form onSubmit={handleSubmit}>
-          <Input
-            type="text"
-            name="label"
-            placeholder="Label"
-            value={newLink.label}
-            onChange={handleChange}
-          ></Input>
-          <Input
-            type="text"
-            name="url"
-            placeholder="URL"
-            value={newLink.url}
-            onChange={handleChange}
-          ></Input>
-          <Button type="submit">+</Button>
-        </form>
+      <NewLinkContainer onSubmit={handleSubmit}>
+        <Input
+          type="text"
+          name="label"
+          placeholder="Label"
+          value={newLink.label}
+          onChange={handleChange}
+        ></Input>
+        <Input
+          type="text"
+          name="url"
+          placeholder="URL"
+          value={newLink.url}
+          onChange={handleChange}
+        ></Input>
+        <Button type="submit">+</Button>
       </NewLinkContainer>
     </Window>
   );
@@ -84,11 +82,12 @@ const LinksWindow = ({ selected }) => {
 
 const Window = styled.div`
   height: 100%;
-  padding: 3em 2em;
+  width: 100%;
+  padding: 3em 12em 3em 3em;
+  margin-left: 20em;
 `;
 
-const NewLinkContainer = styled.div`
-  width: 100%;
+const NewLinkContainer = styled.form`
   display: flex;
   justify-content: space-between;
 `;
