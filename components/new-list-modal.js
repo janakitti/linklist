@@ -21,7 +21,7 @@ const NewListModal = (props) => {
       });
       console.log(res);
       setNewList("");
-      props.onHide();
+      props.onHide(res.data._id);
     } catch (ex) {
       console.log(ex);
     }

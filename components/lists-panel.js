@@ -11,14 +11,10 @@ const ListsPanel = ({ user, selected, handleSelect }) => {
   const [lists, setLists] = useState([]);
 
   useEffect(async () => {
-    console.log(user.lists);
-    fetchLists().then(() => {
-      console.log(lists);
-      if (lists.length != 0) {
-        console.log(lists[0]._id);
-        handleSelect(lists[0]._id);
-      }
-    });
+    await fetchLists();
+    if (lists.length != 0) {
+      handleSelect(lists[0]._id);
+    }
   }, [user.lists]);
 
   const fetchLists = async () => {
@@ -33,9 +29,12 @@ const ListsPanel = ({ user, selected, handleSelect }) => {
     }
   };
 
-  const onHide = () => {
+  const onHide = async (id) => {
     setModalShow(false);
-    fetchLists();
+    await fetchLists();
+    if (lists.length != 0) {
+      handleSelect(id);
+    }
   };
 
   const listItems = lists.map((list, idx) => (
