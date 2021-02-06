@@ -21,14 +21,16 @@ const LinksWindow = ({ selected }) => {
 
   const fetchLinks = async () => {
     try {
-      const res = await axios.get(
-        "http://localhost:4000/api/links/" + selected,
-        {
-          method: "get",
-          withCredentials: true,
-        }
-      );
-      setLinks(res.data);
+      if (selected) {
+        const res = await axios.get(
+          "http://localhost:4000/api/links/" + selected,
+          {
+            method: "get",
+            withCredentials: true,
+          }
+        );
+        setLinks(res.data);
+      }
     } catch (ex) {
       console.log(ex);
     }

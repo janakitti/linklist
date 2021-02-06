@@ -11,7 +11,7 @@ export default function Links() {
   const [user, setUser] = useState({
     username: "",
     email: "",
-    listsIds: ["o"],
+    lists: [""],
   });
 
   const [selected, setSelected] = useState("");
@@ -34,7 +34,7 @@ export default function Links() {
 
   return (
     <FullRow>
-      <ListsPanel user={user} handleSelect={handleSelect} selected={selected} />
+      <ListsPanel user={user} selected={selected} handleSelect={handleSelect} />
       <LinksWindow selected={selected} />
     </FullRow>
   );

@@ -6,13 +6,20 @@ import Row from "react-bootstrap/Row";
 import Grid from "@material-ui/core/Grid";
 import NewListModal from "./new-list-modal";
 
-const ListsPanel = ({ user, handleSelect, selected }) => {
+const ListsPanel = ({ user, selected, handleSelect }) => {
   const [modalShow, setModalShow] = useState(false);
   const [lists, setLists] = useState([]);
 
   useEffect(async () => {
-    fetchLists();
-  }, [user.listIds]);
+    console.log(user.lists);
+    fetchLists().then(() => {
+      console.log(lists);
+      if (lists.length != 0) {
+        console.log(lists[0]._id);
+        handleSelect(lists[0]._id);
+      }
+    });
+  }, [user.lists]);
 
   const fetchLists = async () => {
     try {
@@ -46,8 +53,10 @@ const ListsPanel = ({ user, handleSelect, selected }) => {
       <Profile>
         <Name>{user.username}</Name>
       </Profile>
-      <div>{listItems}</div>
-      <NewListItem onClick={() => setModalShow(true)}>New list +</NewListItem>
+      <ListContainer>
+        {listItems}
+        <NewListItem onClick={() => setModalShow(true)}>New list +</NewListItem>
+      </ListContainer>
 
       <NewListModal show={modalShow} onHide={onHide} />
     </Panel>
@@ -73,6 +82,13 @@ const Name = styled.h1`
   font-family: Poppins;
   font-weight: 700;
   font-size: 2em;
+`;
+
+const ListContainer = styled.div`
+  height: 30em;
+  margin: 0 -2em;
+  padding: 0 2em;
+  overflow-y: scroll;
 `;
 
 const NewListItem = styled.div`
