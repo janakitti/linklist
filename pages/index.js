@@ -1,8 +1,8 @@
-import Head from 'next/head'
-import styles from '../styles/Home.module.css'
-import {useState} from "react";
-import SignIn from '../components/sign-in';
-import SignUp from '../components/sign-up';
+import Head from "next/head";
+import styles from "../styles/Home.module.css";
+import { useState } from "react";
+import SignIn from "../components/sign-in";
+import SignUp from "../components/sign-up";
 
 export default function Home() {
   const [state, setState] = useState("SignUp");
@@ -13,8 +13,6 @@ export default function Home() {
     //     <title>Create Next App</title>
     //     <link rel="icon" href="/favicon.ico" />
     //   </Head>
-
-
 
     //   <footer className={styles.footer}>
     //     <a
@@ -32,12 +30,9 @@ export default function Home() {
       {
         {
           SignIn: <SignIn setState={setState} />,
-          SignUp: <SignUp setState={setState} />
+          SignUp: <SignUp setState={setState} />,
         }[state]
       }
-      
     </div>
-      
-
-  )
+  );
 }

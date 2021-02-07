@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import LinkItem from "./link-item";
+import LinkItem from "./link-item/link-item";
 import styled from "styled-components";
 import axios from "axios";
 
