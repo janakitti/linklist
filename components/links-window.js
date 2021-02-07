@@ -1,10 +1,16 @@
 import { useState, useEffect } from "react";
 import LinkItem from "./link-item/link-item";
+import EditLinkModal from "./edit-link-modal";
 import styled from "styled-components";
 import axios from "axios";
 
 const LinksWindow = ({ selected }) => {
+  const [modalShow, setModalShow] = useState(false);
   const [links, setLinks] = useState([]);
+  const [selectedLink, setSelectedLink] = useState({
+    label: "",
+    url: "",
+  });
   const [newLink, setNewLink] = useState({
     label: "",
     url: "",
@@ -54,8 +60,19 @@ const LinksWindow = ({ selected }) => {
     }
   };
 
+  const onHide = async (id, name) => {
+    setModalShow(false);
+  };
+
   const linkItems = links.map((link, idx) => (
-    <LinkItem key={idx} _id={link._id} label={link.label} url={link.label} />
+    <LinkItem
+      key={idx}
+      _id={link._id}
+      label={link.label}
+      url={link.url}
+      setModalShow={setModalShow}
+      setSelectedLink={setSelectedLink}
+    />
   ));
 
   return (
@@ -78,6 +95,7 @@ const LinksWindow = ({ selected }) => {
         ></Input>
         <Button type="submit">+</Button>
       </NewLinkContainer>
+      <EditLinkModal show={modalShow} onHide={onHide} selected={selectedLink} />
     </Window>
   );
 };

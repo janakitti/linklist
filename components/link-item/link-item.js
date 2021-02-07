@@ -1,12 +1,21 @@
 import styled from "styled-components";
 import Kebab from "../../icons/kebab";
 
-const LinkItem = ({ _id, label, url }) => {
+const LinkItem = ({ _id, label, url, setModalShow, setSelectedLink }) => {
   return (
     <Item>
       <Content>
         {label}
-        <div className="kebab">
+        <div
+          className="kebab"
+          onClick={async () => {
+            await setSelectedLink({
+              label,
+              url,
+            });
+            setModalShow(true);
+          }}
+        >
           <Kebab />
         </div>
       </Content>
