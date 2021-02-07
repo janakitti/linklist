@@ -85,8 +85,8 @@ const LinksWindow = ({ selected }) => {
 const Window = styled.div`
   height: 100%;
   width: 100%;
-  padding: 3em 12em 3em 3em;
-  margin-left: 20em;
+  padding: 3em;
+  overflow-y: scroll;
 `;
 
 const NewLinkContainer = styled.form`

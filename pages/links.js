@@ -3,6 +3,7 @@ import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import ListsPanel from "../components/lists-panel";
 import LinksWindow from "../components/links-window";
+import ListDetailPanel from "../components/list-detail-panel/list-detail-panel";
 import styled from "styled-components";
 import { useEffect, useState } from "react";
 import axios from "axios";
@@ -14,7 +15,10 @@ export default function Links() {
     lists: [""],
   });
 
-  const [selected, setSelected] = useState("");
+  const [selected, setSelected] = useState({
+    id: "",
+    name: "",
+  });
 
   useEffect(async () => {
     try {
@@ -28,14 +32,28 @@ export default function Links() {
     }
   }, []);
 
-  const handleSelect = (id) => {
-    setSelected(id);
+  const handleSelect = (id, name) => {
+    setSelected({
+      id,
+      name,
+    });
   };
 
   return (
     <FullRow>
-      <ListsPanel user={user} selected={selected} handleSelect={handleSelect} />
-      <LinksWindow selected={selected} />
+      <FullCol xs={3}>
+        <ListsPanel
+          user={user}
+          selected={selected.id}
+          handleSelect={handleSelect}
+        />
+      </FullCol>
+      <FullCol xs={6}>
+        <LinksWindow selected={selected.id} />
+      </FullCol>
+      <FullCol xs={3}>
+        <ListDetailPanel selected={selected} />
+      </FullCol>
     </FullRow>
   );
 }

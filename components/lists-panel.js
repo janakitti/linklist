@@ -13,7 +13,7 @@ const ListsPanel = ({ user, selected, handleSelect }) => {
   useEffect(async () => {
     await fetchLists();
     if (lists.length != 0) {
-      handleSelect(lists[0]._id);
+      handleSelect(lists[0]._id, lists[0].name);
     }
   }, [user.lists]);
 
@@ -29,11 +29,11 @@ const ListsPanel = ({ user, selected, handleSelect }) => {
     }
   };
 
-  const onHide = async (id) => {
+  const onHide = async (id, name) => {
     setModalShow(false);
     await fetchLists();
     if (lists.length != 0) {
-      handleSelect(id);
+      handleSelect(id, name);
     }
   };
 
@@ -72,9 +72,7 @@ const Profile = styled.div`
 const Panel = styled.div`
   background-color: #f2f2f2;
   height: 100%;
-  width: 20em;
   padding: 3em 2em;
-  position: fixed;
 `;
 
 const Name = styled.h1`
