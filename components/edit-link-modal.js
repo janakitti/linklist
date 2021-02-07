@@ -63,30 +63,16 @@ const EditLinkModal = (props) => {
         ></Input>
       </Modal.Body>
       <Modal.Footer>
-        <Button onClick={handleSubmit}>Delete</Button>
-        <Button onClick={handleSubmit}>Save Changes</Button>
+        <button onClick={handleSubmit} className="delete-button-auto">
+          Delete
+        </button>
+        <button onClick={handleSubmit} className="primary-button-auto">
+          Save Changes
+        </button>
       </Modal.Footer>
     </Modal>
   );
 };
-
-const Button = styled.button`
-  width: auto;
-  height: 3em;
-
-  padding: 0 2em;
-  margin: 0.5em 0 0 1em;
-
-  background: #dec800;
-  box-shadow: 4px 4px 24px rgba(0, 0, 0, 0.15);
-  border: none;
-  border-radius: 56.5px;
-
-  color: #ffffff;
-  font-family: Poppins;
-  font-weight: 300;
-  font-size: 1em;
-`;
 
 const Title = styled.h1`
   font-family: Poppins;

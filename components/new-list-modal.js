@@ -30,7 +30,7 @@ const NewListModal = (props) => {
   return (
     <Modal
       {...props}
-      size="lg"
+      size="md"
       aria-labelledby="contained-modal-title-vcenter"
       centered
     >
@@ -47,7 +47,9 @@ const NewListModal = (props) => {
         ></Input>
       </Modal.Body>
       <Modal.Footer>
-        <Button onClick={handleSubmit}>Close</Button>
+        <button onClick={handleSubmit} className="primary-button-auto">
+          Close
+        </button>
       </Modal.Footer>
     </Modal>
   );

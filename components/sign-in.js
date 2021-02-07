@@ -56,7 +56,9 @@ const SignIn = ({ setState }) => {
             value={user.password}
             onChange={handleChange}
           ></Input>
-          <Button type="submit">Sign in</Button>
+          <button type="submit" className="primary-button-full">
+            Sign in
+          </button>
         </form>
         <Info>
           Don't have an account?{" "}
@@ -112,24 +114,6 @@ const Input = styled.input`
   background: #ffffff;
   border: none;
   border-radius: 56.5px;
-`;
-
-const Button = styled.button`
-  width: 30em;
-  height: 3em;
-
-  padding: 0 2em;
-  margin: 0.5em 0;
-
-  background: #dec800;
-  box-shadow: 4px 4px 24px rgba(0, 0, 0, 0.15);
-  border: none;
-  border-radius: 56.5px;
-
-  color: #ffffff;
-  font-family: Poppins;
-  font-weight: 300;
-  font-size: 1em;
 `;
 
 export default SignIn;
