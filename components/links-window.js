@@ -8,6 +8,7 @@ const LinksWindow = ({ selected }) => {
   const [modalShow, setModalShow] = useState(false);
   const [links, setLinks] = useState([]);
   const [selectedLink, setSelectedLink] = useState({
+    id: "",
     label: "",
     url: "",
   });
@@ -95,7 +96,12 @@ const LinksWindow = ({ selected }) => {
         ></Input>
         <Button type="submit">+</Button>
       </NewLinkContainer>
-      <EditLinkModal show={modalShow} onHide={onHide} selected={selectedLink} />
+      <EditLinkModal
+        show={modalShow}
+        onHide={onHide}
+        selectedLink={selectedLink}
+        fetchLinks={fetchLinks}
+      />
     </Window>
   );
 };

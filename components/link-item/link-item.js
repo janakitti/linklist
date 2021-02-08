@@ -10,6 +10,7 @@ const LinkItem = ({ _id, label, url, setModalShow, setSelectedLink }) => {
           className="kebab"
           onClick={async () => {
             await setSelectedLink({
+              id: _id,
               label,
               url,
             });

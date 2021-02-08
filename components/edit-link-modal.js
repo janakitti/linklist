@@ -3,7 +3,7 @@ import { useState, useEffect } from "react";
 import styled from "styled-components";
 import axios from "axios";
 
-const EditLinkModal = (props) => {
+const EditLinkModal = ({ show, onHide, selectedLink, fetchLinks }) => {
   const [newList, setNewList] = useState("");
   const [editedLink, setEditedLink] = useState({
     label: "",
@@ -11,8 +11,11 @@ const EditLinkModal = (props) => {
   });
 
   useEffect(() => {
-    setEditedLink(props.selected);
-  }, [props.selected]);
+    setEditedLink({
+      label: selectedLink.label,
+      url: selectedLink.url,
+    });
+  }, [selectedLink]);
 
   const handleChange = async (event) => {
     const { name, value } = event.target;
@@ -21,16 +24,34 @@ const EditLinkModal = (props) => {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
+  };
+
+  const handleDelete = async () => {
     try {
-      const name = {
-        name: newList,
-      };
-      const res = await axios.post("http://localhost:4000/api/lists", name, {
-        withCredentials: true,
-      });
-      console.log(res);
-      setNewList("");
-      props.onHide(res.data._id, res.data.name);
+      const res = await axios.delete(
+        "http://localhost:4000/api/links/" + selectedLink.id,
+        {
+          withCredentials: true,
+        }
+      );
+      onHide();
+      fetchLinks();
+    } catch (ex) {
+      console.log(ex);
+    }
+  };
+
+  const handleEdit = async () => {
+    try {
+      const res = await axios.put(
+        "http://localhost:4000/api/links/" + selectedLink.id,
+        editedLink,
+        {
+          withCredentials: true,
+        }
+      );
+      onHide();
+      fetchLinks();
     } catch (ex) {
       console.log(ex);
     }
@@ -38,7 +59,8 @@ const EditLinkModal = (props) => {
 
   return (
     <Modal
-      {...props}
+      show={show}
+      onHide={onHide}
       size="md"
       aria-labelledby="contained-modal-title-vcenter"
       centered
@@ -63,10 +85,10 @@ const EditLinkModal = (props) => {
         ></Input>
       </Modal.Body>
       <Modal.Footer>
-        <button onClick={handleSubmit} className="delete-button-auto">
+        <button onClick={handleDelete} className="delete-button-auto">
           Delete
         </button>
-        <button onClick={handleSubmit} className="primary-button-auto">
+        <button onClick={handleEdit} className="primary-button-auto">
           Save Changes
         </button>
       </Modal.Footer>
