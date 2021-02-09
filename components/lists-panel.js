@@ -1,9 +1,7 @@
 import styled from "styled-components";
 import { useEffect, useState } from "react";
 import axios from "axios";
-import ListItem from "./list-item";
-import Row from "react-bootstrap/Row";
-import Grid from "@material-ui/core/Grid";
+import ListItem from "./list-item/list-item";
 import NewListModal from "./new-list-modal";
 
 const ListsPanel = ({ user, selected, handleSelect }) => {

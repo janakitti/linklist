@@ -1,7 +1,6 @@
+@import "./variables";
 @import "../components/link-item/link-item.scss";
-
-$primary: #dec800;
-$warn: #f84545;
+@import "../components/list-item/list-item.scss";
 
 @mixin button($width, $color) {
   width: $width;
@@ -31,4 +30,24 @@ $warn: #f84545;
 
 .delete-button-auto {
   @include button(auto, $warn);
+}
+
+@mixin text-input($width, $color) {
+  width: $width;
+  height: 3em;
+
+  padding: 0 2em;
+  margin: 0.5em 1em 0.5em 0;
+
+  background-color: $color;
+  border: none;
+  border-radius: 50em;
+}
+
+.text-input-welcome {
+  @include text-input(30em, #ffffff);
+}
+
+.text-input-modal {
+  @include text-input(100%, $light);
 }

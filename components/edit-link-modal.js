@@ -69,20 +69,22 @@ const EditLinkModal = ({ show, onHide, selectedLink, fetchLinks }) => {
         <Title id="contained-modal-title-vcenter">Create new list</Title>
       </Modal.Header>
       <Modal.Body>
-        <Input
+        <input
+          className="text-input-modal"
           type="text"
           name="label"
           placeholder="Edit label"
           value={editedLink.label}
           onChange={handleChange}
-        ></Input>
-        <Input
+        ></input>
+        <input
+          className="text-input-modal"
           type="text"
           name="url"
           placeholder="Edit URL"
           value={editedLink.url}
           onChange={handleChange}
-        ></Input>
+        ></input>
       </Modal.Body>
       <Modal.Footer>
         <button onClick={handleDelete} className="delete-button-auto">
@@ -100,18 +102,6 @@ const Title = styled.h1`
   font-family: Poppins;
   font-weight: 700;
   font-size: 2em;
-`;
-
-const Input = styled.input`
-  width: 100%;
-  height: 3em;
-
-  padding: 0 2em;
-  margin: 0.5em 1em 0.5em 0;
-
-  background-color: #f2f2f2;
-  border: none;
-  border-radius: 56.5px;
 `;
 
 export default EditLinkModal;

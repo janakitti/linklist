@@ -44,34 +44,38 @@ const SignUp = ({ setState }) => {
         <Title>linklist</Title>
         <Subtitle>Sign up for better bookmarking</Subtitle>
         <form onSubmit={handleSubmit}>
-          <Input
+          <input
+            className="text-input-welcome"
             type="text"
             name="username"
             placeholder="Username"
             value={user.username}
             onChange={handleChange}
-          ></Input>
-          <Input
+          ></input>
+          <input
+            className="text-input-welcome"
             type="email"
             name="email"
             placeholder="Email"
             value={user.email}
             onChange={handleChange}
-          ></Input>
-          <Input
+          ></input>
+          <input
+            className="text-input-welcome"
             type="password"
             name="password"
             placeholder="Password"
             value={user.password}
             onChange={handleChange}
-          ></Input>
-          <Input
+          ></input>
+          <input
+            className="text-input-welcome"
             type="password"
             name="passwordConfirm"
             placeholder="Confirm password"
             value={user.passwordConfirm}
             onChange={handleChange}
-          ></Input>
+          ></input>
           <button type="submit" className="primary-button-full">
             Sign up
           </button>

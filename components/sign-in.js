@@ -42,20 +42,22 @@ const SignIn = ({ setState }) => {
         <Title>linklist</Title>
         <Subtitle>Sign in for better bookmarking</Subtitle>
         <form onSubmit={handleSubmit}>
-          <Input
+          <input
+            className="text-input-welcome"
             type="email"
             name="email"
             placeholder="Email"
             value={user.email}
             onChange={handleChange}
-          ></Input>
-          <Input
+          ></input>
+          <input
+            className="text-input-welcome"
             type="password"
             name="password"
             placeholder="Password"
             value={user.password}
             onChange={handleChange}
-          ></Input>
+          ></input>
           <button type="submit" className="primary-button-full">
             Sign in
           </button>
@@ -102,18 +104,6 @@ const Subtitle = styled.h2`
   font-size: 1em;
 
   margin: 0 0 2em 0;
-`;
-
-const Input = styled.input`
-  width: 30em;
-  height: 3em;
-
-  padding: 0 2em;
-  margin: 0.5em 0;
-
-  background: #ffffff;
-  border: none;
-  border-radius: 56.5px;
 `;
 
 export default SignIn;

@@ -38,13 +38,14 @@ const NewListModal = (props) => {
         <Title id="contained-modal-title-vcenter">Create new list</Title>
       </Modal.Header>
       <Modal.Body>
-        <Input
+        <input
+          className="text-input-modal"
           type="text"
           name="name"
           placeholder="List name"
           value={newList}
           onChange={handleChange}
-        ></Input>
+        ></input>
       </Modal.Body>
       <Modal.Footer>
         <button onClick={handleSubmit} className="primary-button-auto">
@@ -77,18 +78,6 @@ const Title = styled.h1`
   font-family: Poppins;
   font-weight: 700;
   font-size: 2em;
-`;
-
-const Input = styled.input`
-  flex-grow: 4;
-  height: 3em;
-
-  padding: 0 2em;
-  margin: 0.5em 1em 0.5em 0;
-
-  background-color: #f2f2f2;
-  border: none;
-  border-radius: 56.5px;
 `;
 
 export default NewListModal;
