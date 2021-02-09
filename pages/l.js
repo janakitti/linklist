@@ -24,7 +24,7 @@ const PublicList = () => {
     } catch (ex) {
       console.log(ex);
     }
-  }, []);
+  }, [id]);
 
   const linkItems = list.links.map((link, idx) => (
     <PublicLinkItem
