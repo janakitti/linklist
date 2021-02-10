@@ -32,6 +32,10 @@
   @include button(auto, $warn);
 }
 
+.dark-button-auto {
+  @include button(auto, $dark);
+}
+
 @mixin text-input($width, $color) {
   width: $width;
   height: 3em;

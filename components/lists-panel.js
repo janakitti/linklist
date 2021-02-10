@@ -11,7 +11,7 @@ const ListsPanel = ({ user, selected, handleSelect }) => {
   useEffect(async () => {
     await fetchLists();
     if (lists.length != 0) {
-      handleSelect(lists[0]._id, lists[0].name);
+      handleSelect(lists[0]);
     }
   }, [user.lists]);
 
@@ -22,24 +22,24 @@ const ListsPanel = ({ user, selected, handleSelect }) => {
         withCredentials: true,
       });
       setLists(res.data);
+      console.log(res.data);
     } catch (ex) {
       console.log(ex);
     }
   };
 
-  const onHide = async (id, name) => {
+  const onHide = async (list) => {
     setModalShow(false);
     await fetchLists();
     if (lists.length != 0) {
-      handleSelect(id, name);
+      handleSelect(list);
     }
   };
 
   const listItems = lists.map((list, idx) => (
     <ListItem
       key={idx}
-      _id={list._id}
-      name={list.name}
+      list={list}
       handleSelect={handleSelect}
       selected={selected}
     />

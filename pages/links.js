@@ -16,8 +16,12 @@ export default function Links() {
   });
 
   const [selected, setSelected] = useState({
-    id: "",
+    _id: "",
     name: "",
+    owner: "",
+    links: [],
+    publicListId: "",
+    isPublished: "",
   });
 
   useEffect(async () => {
@@ -32,24 +36,25 @@ export default function Links() {
     }
   }, []);
 
-  const handleSelect = (id, name) => {
-    setSelected({
-      id,
-      name,
-    });
+  const handleSelect = (list) => {
+    setSelected(list);
   };
+
+  useEffect(() => {
+    console.log(selected);
+  }, [selected]);
 
   return (
     <FullRow>
       <FullCol xs={3}>
         <ListsPanel
           user={user}
-          selected={selected.id}
+          selected={selected}
           handleSelect={handleSelect}
         />
       </FullCol>
       <FullCol xs={6}>
-        <LinksWindow selected={selected.id} />
+        <LinksWindow selected={selected} />
       </FullCol>
       <FullCol xs={3}>
         <ListDetailPanel selected={selected} />

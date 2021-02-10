@@ -1,18 +1,22 @@
 import styled from "styled-components";
 import { useEffect, useState } from "react";
 
-const ListItem = ({ _id, name, handleSelect, selected }) => {
+const ListItem = ({ list, handleSelect, selected }) => {
   const toggleSelected = () => {
-    handleSelect(_id, name);
+    handleSelect(list);
   };
 
+  useEffect(() => {
+    console.log(selected._id);
+    console.log(list._id);
+  }, []);
   return (
     <Item
       className="list-item"
       onClick={toggleSelected}
-      selected={selected === _id}
+      selected={selected._id === list._id}
     >
-      {name}
+      {list.name}
     </Item>
   );
 };

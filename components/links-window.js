@@ -28,9 +28,9 @@ const LinksWindow = ({ selected }) => {
 
   const fetchLinks = async () => {
     try {
-      if (selected) {
+      if (selected._id) {
         const res = await axios.get(
-          "http://localhost:4000/api/links/" + selected,
+          "http://localhost:4000/api/links/" + selected._id,
           {
             method: "get",
             withCredentials: true,
@@ -47,7 +47,7 @@ const LinksWindow = ({ selected }) => {
     event.preventDefault();
     try {
       const res = await axios.post(
-        "http://localhost:4000/api/links/" + selected,
+        "http://localhost:4000/api/links/" + selected._id,
         newLink,
         {
           withCredentials: true,
