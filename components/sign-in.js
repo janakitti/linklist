@@ -14,7 +14,6 @@ const SignIn = ({ setState }) => {
   function handleChange(event) {
     const { name, value } = event.target;
     setUser({ ...user, [name]: value });
-    console.log(user);
   }
 
   async function handleSubmit(event) {
@@ -29,7 +28,6 @@ const SignIn = ({ setState }) => {
       const res = await axios.post("http://localhost:4000/api/auth/", creds, {
         withCredentials: true,
       });
-      console.log(res);
       router.push("/links");
     } catch (ex) {
       console.log(ex);

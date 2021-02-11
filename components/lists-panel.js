@@ -4,9 +4,8 @@ import axios from "axios";
 import ListItem from "./list-item/list-item";
 import NewListModal from "./new-list-modal";
 
-const ListsPanel = ({ user, selected, handleSelect }) => {
+const ListsPanel = ({ user, selected, handleSelect, lists, fetchLists }) => {
   const [modalShow, setModalShow] = useState(false);
-  const [lists, setLists] = useState([]);
 
   useEffect(async () => {
     await fetchLists();
@@ -15,25 +14,10 @@ const ListsPanel = ({ user, selected, handleSelect }) => {
     }
   }, [user.lists]);
 
-  const fetchLists = async () => {
-    try {
-      const res = await axios.get("http://localhost:4000/api/lists", {
-        method: "get",
-        withCredentials: true,
-      });
-      setLists(res.data);
-      console.log(res.data);
-    } catch (ex) {
-      console.log(ex);
-    }
-  };
-
   const onHide = async (list) => {
     setModalShow(false);
     await fetchLists();
-    if (lists.length != 0) {
-      handleSelect(list);
-    }
+    handleSelect(list);
   };
 
   const listItems = lists.map((list, idx) => (

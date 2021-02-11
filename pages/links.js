@@ -14,7 +14,7 @@ export default function Links() {
     email: "",
     lists: [""],
   });
-
+  const [lists, setLists] = useState([]);
   const [selected, setSelected] = useState({
     _id: "",
     name: "",
@@ -44,6 +44,23 @@ export default function Links() {
     console.log(selected);
   }, [selected]);
 
+  const fetchLists = async () => {
+    try {
+      const res = await axios.get("http://localhost:4000/api/lists", {
+        method: "get",
+        withCredentials: true,
+      });
+      setLists(res.data);
+    } catch (ex) {
+      console.log(ex);
+    }
+  };
+
+  const fetchListsAndSetList = async (list) => {
+    await fetchLists();
+    handleSelect(list);
+  };
+
   return (
     <FullRow>
       <FullCol xs={3}>
@@ -51,13 +68,18 @@ export default function Links() {
           user={user}
           selected={selected}
           handleSelect={handleSelect}
+          lists={lists}
+          fetchLists={fetchLists}
         />
       </FullCol>
       <FullCol xs={6}>
         <LinksWindow selected={selected} />
       </FullCol>
       <FullCol xs={3}>
-        <ListDetailPanel selected={selected} />
+        <ListDetailPanel
+          selected={selected}
+          fetchListsAndSetList={fetchListsAndSetList}
+        />
       </FullCol>
     </FullRow>
   );

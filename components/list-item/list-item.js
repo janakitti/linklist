@@ -6,10 +6,10 @@ const ListItem = ({ list, handleSelect, selected }) => {
     handleSelect(list);
   };
 
-  useEffect(() => {
-    console.log(selected._id);
-    console.log(list._id);
-  }, []);
+  // useEffect(() => {
+  //   console.log(selected._id);
+  //   console.log(list._id);
+  // }, [list, selected]);
   return (
     <Item
       className="list-item"

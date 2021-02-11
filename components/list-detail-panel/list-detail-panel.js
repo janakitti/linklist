@@ -2,8 +2,9 @@ import styled from "styled-components";
 import { useEffect, useState } from "react";
 import axios from "axios";
 
-const ListDetailPanel = ({ selected }) => {
+const ListDetailPanel = ({ selected, fetchListsAndSetList }) => {
   const publish = async () => {
+    console.log(selected);
     if (selected.publicListId) {
       try {
         if (selected) {
@@ -35,6 +36,7 @@ const ListDetailPanel = ({ selected }) => {
         console.log(ex);
       }
     }
+    fetchListsAndSetList(selected);
   };
 
   return (

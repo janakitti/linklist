@@ -14,7 +14,6 @@ const SignUp = ({ setState }) => {
   function handleChange(event) {
     const { name, value } = event.target;
     setUser({ ...user, [name]: value });
-    console.log(user);
   }
 
   async function handleSubmit(event) {
@@ -31,7 +30,6 @@ const SignUp = ({ setState }) => {
         "http://localhost:4000/api/users/",
         newUser
       );
-      console.log(response);
       setState("SignIn");
     } catch (ex) {
       console.log(ex);
