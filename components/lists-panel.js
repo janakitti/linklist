@@ -10,14 +10,14 @@ const ListsPanel = ({ user, selected, handleSelect, lists, fetchLists }) => {
   useEffect(async () => {
     await fetchLists();
     if (lists.length != 0) {
-      handleSelect(lists[0]);
+      handleSelect(lists[0], 0);
     }
   }, [user.lists]);
 
   const onHide = async (list) => {
     setModalShow(false);
+    handleSelect(list, lists.length);
     await fetchLists();
-    handleSelect(list);
   };
 
   const listItems = lists.map((list, idx) => (
@@ -26,6 +26,7 @@ const ListsPanel = ({ user, selected, handleSelect, lists, fetchLists }) => {
       list={list}
       handleSelect={handleSelect}
       selected={selected}
+      index={idx}
     />
   ));
 

@@ -16,12 +16,15 @@ export default function Links() {
   });
   const [lists, setLists] = useState([]);
   const [selected, setSelected] = useState({
-    _id: "",
-    name: "",
-    owner: "",
-    links: [],
-    publicListId: "",
-    isPublished: "",
+    data: {
+      _id: "",
+      name: "",
+      owner: "",
+      links: [],
+      publicListId: "",
+      isPublished: "",
+    },
+    index: 0,
   });
 
   useEffect(async () => {
@@ -36,8 +39,11 @@ export default function Links() {
     }
   }, []);
 
-  const handleSelect = (list) => {
-    setSelected(list);
+  const handleSelect = (list, index) => {
+    setSelected({
+      data: list,
+      index,
+    });
   };
 
   useEffect(() => {
@@ -56,9 +62,13 @@ export default function Links() {
     }
   };
 
-  const fetchListsAndSetList = async (list) => {
-    await fetchLists();
-    handleSelect(list);
+  const fetchListsAndSetList = async (res, index) => {
+    console.log(res);
+    handleSelect(res, index);
+    setLists((prevLists) => {
+      prevLists[index] = res;
+      return prevLists;
+    });
   };
 
   return (
