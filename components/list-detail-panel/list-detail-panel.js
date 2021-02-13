@@ -3,11 +3,23 @@ import { useEffect, useState } from "react";
 import { Spinner } from "react-bootstrap";
 import axios from "axios";
 import Image from "next/image";
+import Snackbar from "@material-ui/core/Snackbar";
+import Slide from "@material-ui/core/Slide";
 
 const ListDetailPanel = ({ selected, fetchListsAndSetList }) => {
   const [isPublishing, setIsPublishing] = useState(false);
   const [publicLink, setPublicLink] = useState("");
-  console.log(selected);
+  const [state, setState] = useState({
+    open: false,
+    Transition: Slide,
+  });
+
+  const handleClose = () => {
+    setState({
+      ...state,
+      open: false,
+    });
+  };
 
   useEffect(() => {
     setPublicLink(selected.data.publicListId ? selected.data.publicListId : "");
@@ -53,6 +65,10 @@ const ListDetailPanel = ({ selected, fetchListsAndSetList }) => {
 
   const copyPublicLink = () => {
     navigator.clipboard.writeText(publicLink);
+    setState({
+      ...state,
+      open: true,
+    });
   };
 
   return (
@@ -85,6 +101,14 @@ const ListDetailPanel = ({ selected, fetchListsAndSetList }) => {
         readOnly
         onClick={copyPublicLink}
       ></input>
+      <Snackbar
+        open={state.open}
+        onClose={handleClose}
+        TransitionComponent={state.Transition}
+        message="Copied!"
+        key={state.Transition.name}
+        autoHideDuration={2000}
+      />
     </Panel>
   );
 };
