@@ -56,7 +56,7 @@ export default function Links() {
         method: "get",
         withCredentials: true,
       });
-      setLists(res.data);
+      await setLists(res.data);
     } catch (ex) {
       console.log(ex);
     }
