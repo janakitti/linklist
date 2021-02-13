@@ -14,10 +14,14 @@ const ListsPanel = ({ user, selected, handleSelect, lists, fetchLists }) => {
     }
   }, [user.lists]);
 
-  const onHide = async (list) => {
-    setModalShow(false);
+  const onSubmit = async (list) => {
+    onHide();
     handleSelect(list, lists.length);
     await fetchLists();
+  };
+
+  const onHide = async () => {
+    setModalShow(false);
   };
 
   const listItems = lists.map((list, idx) => (
@@ -40,7 +44,7 @@ const ListsPanel = ({ user, selected, handleSelect, lists, fetchLists }) => {
         <NewListItem onClick={() => setModalShow(true)}>New list +</NewListItem>
       </ListContainer>
 
-      <NewListModal show={modalShow} onHide={onHide} />
+      <NewListModal show={modalShow} onSubmit={onSubmit} onHide={onHide} />
     </Panel>
   );
 };
