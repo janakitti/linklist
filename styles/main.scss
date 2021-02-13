@@ -1,6 +1,7 @@
 @import "./variables";
 @import "../components/link-item/link-item.scss";
 @import "../components/list-item/list-item.scss";
+@import "../components/list-detail-panel/list-detail-panel.scss";
 
 @mixin button($width, $color) {
   width: $width;

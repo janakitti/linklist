@@ -1,10 +1,12 @@
 import styled from "styled-components";
 import { useEffect, useState } from "react";
+import { Spinner } from "react-bootstrap";
 import axios from "axios";
 
 const ListDetailPanel = ({ selected, fetchListsAndSetList }) => {
+  const [isPublishing, setIsPublishing] = useState(false);
   const publish = async () => {
-    console.log(selected);
+    setIsPublishing(true);
     if (selected.data.publicListId) {
       try {
         if (selected) {
@@ -31,13 +33,14 @@ const ListDetailPanel = ({ selected, fetchListsAndSetList }) => {
               withCredentials: true,
             }
           );
-          fetchListsAndSetList(res.data.privateList, selected.index);
+          await fetchListsAndSetList(res.data.privateList, selected.index);
           console.log(res);
         }
       } catch (ex) {
         console.log(ex);
       }
     }
+    setIsPublishing(false);
   };
 
   return (
@@ -45,10 +48,17 @@ const ListDetailPanel = ({ selected, fetchListsAndSetList }) => {
       <Profile>
         <Name>{selected.data.name}</Name>
         <div>{selected.data.isPublished}</div>
-        <button type="submit" onClick={publish} className="dark-button-auto">
-          Publish
-        </button>
       </Profile>
+      <div id="publish-container">
+        {isPublishing ? (
+          <Spinner animation="border" id="spinner" />
+        ) : (
+          <p>Published Image</p>
+        )}
+      </div>
+      <button type="submit" onClick={publish} className="dark-button-auto">
+        Publish
+      </button>
     </Panel>
   );
 };
@@ -57,13 +67,17 @@ const Profile = styled.div`
   display: flex;
   justify-content: center;
 
-  padding: 3em 0;
+  padding: 3em 0 0 0;
 `;
 
 const Panel = styled.div`
   background-color: #f2f2f2;
   height: 100%;
   padding: 3em 2em;
+
+  display: flex;
+  align-content: center;
+  flex-direction: column;
 `;
 
 const Name = styled.h1`
