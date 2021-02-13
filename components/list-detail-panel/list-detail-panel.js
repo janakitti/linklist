@@ -2,6 +2,7 @@ import styled from "styled-components";
 import { useEffect, useState } from "react";
 import { Spinner } from "react-bootstrap";
 import axios from "axios";
+import Image from "next/image";
 
 const ListDetailPanel = ({ selected, fetchListsAndSetList }) => {
   const [isPublishing, setIsPublishing] = useState(false);
@@ -53,7 +54,12 @@ const ListDetailPanel = ({ selected, fetchListsAndSetList }) => {
         {isPublishing ? (
           <Spinner animation="border" id="spinner" />
         ) : (
-          <p>Published Image</p>
+          <Image
+            src="/published.svg"
+            alt="Picture of the author"
+            width={500}
+            height={500}
+          />
         )}
       </div>
       <button type="submit" onClick={publish} className="dark-button-auto">
