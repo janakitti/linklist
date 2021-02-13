@@ -51,6 +51,10 @@ const ListDetailPanel = ({ selected, fetchListsAndSetList }) => {
     setIsPublishing(false);
   };
 
+  const copyPublicLink = () => {
+    navigator.clipboard.writeText(publicLink);
+  };
+
   return (
     <Panel>
       <Profile>
@@ -79,6 +83,7 @@ const ListDetailPanel = ({ selected, fetchListsAndSetList }) => {
         placeholder="Public Link"
         value={publicLink}
         readOnly
+        onClick={copyPublicLink}
       ></input>
     </Panel>
   );
