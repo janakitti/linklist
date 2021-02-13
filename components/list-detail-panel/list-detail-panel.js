@@ -5,14 +5,20 @@ import axios from "axios";
 import Image from "next/image";
 import Snackbar from "@material-ui/core/Snackbar";
 import Slide from "@material-ui/core/Slide";
+import DeleteListModal from "../delete-list-modal";
 
-const ListDetailPanel = ({ selected, fetchListsAndSetList }) => {
+const ListDetailPanel = ({
+  selected,
+  fetchListsAndSetList,
+  handleSelectAfterDelete,
+}) => {
   const [isPublishing, setIsPublishing] = useState(false);
   const [publicLink, setPublicLink] = useState("");
   const [state, setState] = useState({
     open: false,
     Transition: Slide,
   });
+  const [modalShow, setModalShow] = useState(false);
 
   const handleClose = () => {
     setState({
@@ -63,6 +69,17 @@ const ListDetailPanel = ({ selected, fetchListsAndSetList }) => {
     setIsPublishing(false);
   };
 
+  const deleteConfirm = () => {};
+
+  const onDelete = async (index) => {
+    await handleSelectAfterDelete(index);
+    onHide();
+  };
+
+  const onHide = async () => {
+    setModalShow(false);
+  };
+
   const copyPublicLink = () => {
     navigator.clipboard.writeText(publicLink);
     setState({
@@ -101,6 +118,13 @@ const ListDetailPanel = ({ selected, fetchListsAndSetList }) => {
         readOnly
         onClick={copyPublicLink}
       ></input>
+      <button
+        type="submit"
+        onClick={() => setModalShow(true)}
+        className="delete-button-auto"
+      >
+        Delete
+      </button>
       <Snackbar
         open={state.open}
         onClose={handleClose}
@@ -108,6 +132,12 @@ const ListDetailPanel = ({ selected, fetchListsAndSetList }) => {
         message="Copied!"
         key={state.Transition.name}
         autoHideDuration={2000}
+      />
+      <DeleteListModal
+        show={modalShow}
+        onDelete={onDelete}
+        list={selected}
+        onHide={onHide}
       />
     </Panel>
   );

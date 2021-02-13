@@ -46,6 +46,29 @@ export default function Links() {
     });
   };
 
+  const handleSelectAfterDelete = async (index) => {
+    console.log(lists[index - 1]);
+    if (index > 0) {
+      setSelected({
+        data: lists[index - 1],
+        index: index - 1,
+      });
+    } else {
+      setSelected({
+        data: {
+          _id: "",
+          name: "",
+          owner: "",
+          links: [],
+          publicListId: "",
+          isPublished: "",
+        },
+        index: 0,
+      });
+    }
+    await fetchLists();
+  };
+
   useEffect(() => {
     console.log(selected);
   }, [selected]);
@@ -89,6 +112,7 @@ export default function Links() {
         <ListDetailPanel
           selected={selected}
           fetchListsAndSetList={fetchListsAndSetList}
+          handleSelectAfterDelete={handleSelectAfterDelete}
         />
       </FullCol>
     </FullRow>
