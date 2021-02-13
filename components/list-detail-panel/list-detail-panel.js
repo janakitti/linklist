@@ -6,6 +6,13 @@ import Image from "next/image";
 
 const ListDetailPanel = ({ selected, fetchListsAndSetList }) => {
   const [isPublishing, setIsPublishing] = useState(false);
+  const [publicLink, setPublicLink] = useState("");
+  console.log(selected);
+
+  useEffect(() => {
+    setPublicLink(selected.data.publicListId ? selected.data.publicListId : "");
+  }, [selected.data.publicListId]);
+
   const publish = async () => {
     setIsPublishing(true);
     if (selected.data.publicListId) {
@@ -65,6 +72,14 @@ const ListDetailPanel = ({ selected, fetchListsAndSetList }) => {
       <button type="submit" onClick={publish} className="dark-button-auto">
         Publish
       </button>
+      <input
+        className="text-input-publish"
+        type="text"
+        name="name"
+        placeholder="Public Link"
+        value={publicLink}
+        readOnly
+      ></input>
     </Panel>
   );
 };

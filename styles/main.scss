@@ -56,3 +56,7 @@
 .text-input-modal {
   @include text-input(100%, $light);
 }
+
+.text-input-publish {
+  @include text-input(100%, #ffffff);
+}
