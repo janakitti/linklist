@@ -13,6 +13,7 @@ const ListDetailPanel = ({
   handleSelectAfterDelete,
 }) => {
   const [isPublishing, setIsPublishing] = useState(false);
+  const [isPublished, setIsPublished] = useState(false);
   const [publicLink, setPublicLink] = useState("");
   const [state, setState] = useState({
     open: false,
@@ -29,6 +30,8 @@ const ListDetailPanel = ({
 
   useEffect(() => {
     setPublicLink(selected.data.publicListId ? selected.data.publicListId : "");
+    setIsPublished(!!selected.data.publicListId);
+    console.log(!!selected.data.publicListId);
   }, [selected.data.publicListId]);
 
   const publish = async () => {
@@ -93,11 +96,27 @@ const ListDetailPanel = ({
         <div>{selected.data.isPublished}</div>
       </Profile>
       <div id="publish-container">
-        {isPublishing ? (
-          <Spinner animation="border" id="spinner" />
+        {selected.data._id ? (
+          isPublishing ? (
+            <Spinner animation="border" id="spinner" />
+          ) : isPublished ? (
+            <Image
+              src="/published.svg"
+              alt="Picture of the author"
+              width={500}
+              height={500}
+            />
+          ) : (
+            <Image
+              src="/publishing.svg"
+              alt="Picture of the author"
+              width={500}
+              height={500}
+            />
+          )
         ) : (
           <Image
-            src="/published.svg"
+            src="/empty.svg"
             alt="Picture of the author"
             width={500}
             height={500}
