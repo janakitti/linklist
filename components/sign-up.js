@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import WelcomeLayout from "./welcome-layout";
+import WelcomeLayout from "./welcome-layout/welcome-layout";
 import { useState } from "react";
 import axios from "axios";
 
