@@ -4,7 +4,7 @@ import EditLinkModal from "./edit-link-modal";
 import styled from "styled-components";
 import axios from "axios";
 
-const LinksWindow = ({ selected }) => {
+const LinksWindow = ({ selected, showErrorModal }) => {
   const [modalShow, setModalShow] = useState(false);
   const [links, setLinks] = useState([]);
   const [selectedLink, setSelectedLink] = useState({
@@ -47,6 +47,12 @@ const LinksWindow = ({ selected }) => {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
+    if (newLink.label?.length < 5) {
+      showErrorModal(
+        "Your link label has got to be at least 5 characters long!"
+      );
+      return;
+    }
     try {
       const res = await axios.post(
         "http://localhost:4000/api/links/" + selected.data._id,

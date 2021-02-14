@@ -4,11 +4,14 @@ import Col from "react-bootstrap/Col";
 import ListsPanel from "../components/lists-panel";
 import LinksWindow from "../components/links-window";
 import ListDetailPanel from "../components/list-detail-panel/list-detail-panel";
+import ErrorModal from "../components/error-modal";
 import styled from "styled-components";
 import { useEffect, useState } from "react";
 import axios from "axios";
 
 export default function Links() {
+  const [errorModalShow, setErrorModalShow] = useState(false);
+  const [errorMsg, setErrorMsg] = useState("");
   const [user, setUser] = useState({
     username: "",
     email: "",
@@ -100,6 +103,15 @@ export default function Links() {
     });
   };
 
+  const onHide = () => {
+    setErrorModalShow(false);
+  };
+
+  const showErrorModal = (msg) => {
+    setErrorMsg(msg);
+    setErrorModalShow(true);
+  };
+
   return (
     <FullRow>
       <FullCol xs={3}>
@@ -112,7 +124,7 @@ export default function Links() {
         />
       </FullCol>
       <FullCol xs={6}>
-        <LinksWindow selected={selected} />
+        <LinksWindow selected={selected} showErrorModal={showErrorModal} />
       </FullCol>
       <FullCol xs={3}>
         <ListDetailPanel
@@ -121,6 +133,7 @@ export default function Links() {
           handleSelectAfterDelete={handleSelectAfterDelete}
         />
       </FullCol>
+      <ErrorModal show={errorModalShow} onHide={onHide} errorMsg={errorMsg} />
     </FullRow>
   );
 }
