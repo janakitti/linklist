@@ -37,6 +37,8 @@ const LinksWindow = ({ selected }) => {
           }
         );
         setLinks(res.data);
+      } else {
+        setLinks([]);
       }
     } catch (ex) {
       console.log(ex);
