@@ -69,8 +69,6 @@ const ListDetailPanel = ({
     setIsPublishing(false);
   };
 
-  const deleteConfirm = () => {};
-
   const onDelete = async (index) => {
     await handleSelectAfterDelete(index);
     onHide();
@@ -106,25 +104,38 @@ const ListDetailPanel = ({
           />
         )}
       </div>
-      <button type="submit" onClick={publish} className="dark-button-auto">
-        Publish
-      </button>
-      <input
-        className="text-input-publish"
-        type="text"
-        name="name"
-        placeholder="Public Link"
-        value={publicLink}
-        readOnly
-        onClick={copyPublicLink}
-      ></input>
-      <button
-        type="submit"
-        onClick={() => setModalShow(true)}
-        className="delete-button-auto"
-      >
-        Delete
-      </button>
+      <>
+        {selected.data._id ? (
+          <>
+            <button
+              type="submit"
+              onClick={publish}
+              className="dark-button-auto"
+            >
+              Publish
+            </button>
+            <input
+              className="text-input-publish"
+              type="text"
+              name="name"
+              placeholder="Public Link"
+              value={publicLink}
+              readOnly
+              onClick={copyPublicLink}
+            ></input>
+            <button
+              type="submit"
+              onClick={() => setModalShow(true)}
+              className="delete-button-auto"
+            >
+              Delete
+            </button>{" "}
+          </>
+        ) : (
+          <h2 className="h-hint">Hm, it's a little empty here...</h2>
+        )}
+      </>
+
       <Snackbar
         open={state.open}
         onClose={handleClose}

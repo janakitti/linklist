@@ -3,6 +3,16 @@
 @import "../components/list-item/list-item.scss";
 @import "../components/list-detail-panel/list-detail-panel.scss";
 
+.h-hint {
+  align-self: center;
+  text-align: center;
+
+  color: $hint;
+  font-family: Poppins;
+  font-weight: 800;
+  font-size: 1em;
+}
+
 @mixin button($width, $color) {
   width: $width;
   height: 3em;
