@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 const PublicLinkItem = ({ _id, label, url }) => {
   return (
-    <a href={"//" + url} target="_blank">
+    <a href={url} target="_blank">
       <Item>
         <Content>{label}</Content>
       </Item>

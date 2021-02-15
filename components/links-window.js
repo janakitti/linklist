@@ -96,7 +96,7 @@ const LinksWindow = ({ selected, showErrorModal }) => {
           onChange={handleChange}
         ></Input>
         <Input
-          type="text"
+          type="url"
           name="url"
           placeholder="URL"
           value={newLink.url}
