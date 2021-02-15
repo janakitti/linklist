@@ -124,7 +124,11 @@ export default function Links() {
         />
       </FullCol>
       <FullCol xs={6}>
-        <LinksWindow selected={selected} showErrorModal={showErrorModal} />
+        <LinksWindow
+          selected={selected}
+          showErrorModal={showErrorModal}
+          listsLength={lists.length}
+        />
       </FullCol>
       <FullCol xs={3}>
         <ListDetailPanel

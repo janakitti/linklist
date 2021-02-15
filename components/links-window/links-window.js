@@ -4,7 +4,7 @@ import EditLinkModal from "../edit-link-modal";
 import styled from "styled-components";
 import axios from "axios";
 
-const LinksWindow = ({ selected, showErrorModal }) => {
+const LinksWindow = ({ selected, showErrorModal, listsLength }) => {
   const [modalShow, setModalShow] = useState(false);
   const [links, setLinks] = useState([]);
   const [selectedLink, setSelectedLink] = useState({
@@ -89,23 +89,29 @@ const LinksWindow = ({ selected, showErrorModal }) => {
       <Window>
         <div>{linkItems}</div>
       </Window>
-      <div onSubmit={handleSubmit} id="new-link-container">
-        <Input
-          type="text"
-          name="label"
-          placeholder="Label"
-          value={newLink.label}
-          onChange={handleChange}
-        ></Input>
-        <Input
-          type="url"
-          name="url"
-          placeholder="URL"
-          value={newLink.url}
-          onChange={handleChange}
-        ></Input>
-        <Button type="submit">+</Button>
-      </div>
+      {listsLength ? (
+        <>
+          <div onSubmit={handleSubmit} id="new-link-container">
+            <Input
+              type="text"
+              name="label"
+              placeholder="Label"
+              value={newLink.label}
+              onChange={handleChange}
+            ></Input>
+            <Input
+              type="url"
+              name="url"
+              placeholder="URL"
+              value={newLink.url}
+              onChange={handleChange}
+            ></Input>
+            <Button type="submit">+</Button>
+          </div>
+        </>
+      ) : (
+        <></>
+      )}
       <EditLinkModal
         show={modalShow}
         onHide={onHide}
