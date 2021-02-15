@@ -109,6 +109,7 @@ const LinksWindow = ({ selected, showErrorModal }) => {
         onHide={onHide}
         selectedLink={selectedLink}
         fetchLinks={fetchLinks}
+        showErrorModal={showErrorModal}
       />
     </Window>
   );

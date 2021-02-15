@@ -3,7 +3,13 @@ import { useState, useEffect } from "react";
 import styled from "styled-components";
 import axios from "axios";
 
-const EditLinkModal = ({ show, onHide, selectedLink, fetchLinks }) => {
+const EditLinkModal = ({
+  show,
+  onHide,
+  selectedLink,
+  fetchLinks,
+  showErrorModal,
+}) => {
   const [newList, setNewList] = useState("");
   const [editedLink, setEditedLink] = useState({
     label: "",
@@ -42,6 +48,12 @@ const EditLinkModal = ({ show, onHide, selectedLink, fetchLinks }) => {
   };
 
   const handleEdit = async () => {
+    if (editedLink.label?.length < 5) {
+      showErrorModal(
+        "Your link label has got to be at least 5 characters long!"
+      );
+      return;
+    }
     try {
       const res = await axios.put(
         "http://localhost:4000/api/links/" + selectedLink.id,
