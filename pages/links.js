@@ -2,7 +2,7 @@ import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import ListsPanel from "../components/lists-panel";
-import LinksWindow from "../components/links-window";
+import LinksWindow from "../components/links-window/links-window";
 import ListDetailPanel from "../components/list-detail-panel/list-detail-panel";
 import ErrorModal from "../components/error-modal";
 import styled from "styled-components";

@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
-import LinkItem from "./link-item/link-item";
-import EditLinkModal from "./edit-link-modal";
+import LinkItem from "../link-item/link-item";
+import EditLinkModal from "../edit-link-modal";
 import styled from "styled-components";
 import axios from "axios";
 
@@ -85,9 +85,11 @@ const LinksWindow = ({ selected, showErrorModal }) => {
   ));
 
   return (
-    <Window>
-      {linkItems}
-      <NewLinkContainer onSubmit={handleSubmit}>
+    <>
+      <Window>
+        <div>{linkItems}</div>
+      </Window>
+      <div onSubmit={handleSubmit} id="new-link-container">
         <Input
           type="text"
           name="label"
@@ -103,7 +105,7 @@ const LinksWindow = ({ selected, showErrorModal }) => {
           onChange={handleChange}
         ></Input>
         <Button type="submit">+</Button>
-      </NewLinkContainer>
+      </div>
       <EditLinkModal
         show={modalShow}
         onHide={onHide}
@@ -111,7 +113,7 @@ const LinksWindow = ({ selected, showErrorModal }) => {
         fetchLinks={fetchLinks}
         showErrorModal={showErrorModal}
       />
-    </Window>
+    </>
   );
 };
 
@@ -120,11 +122,6 @@ const Window = styled.div`
   width: 100%;
   padding: 3em;
   overflow-y: scroll;
-`;
-
-const NewLinkContainer = styled.form`
-  display: flex;
-  justify-content: space-between;
 `;
 
 const Input = styled.input`
