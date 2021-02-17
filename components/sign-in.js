@@ -10,6 +10,7 @@ const SignIn = ({ setState }) => {
     email: "",
     password: "",
   });
+  const [errorMsg, setErrorMsg] = useState("");
 
   function handleChange(event) {
     const { name, value } = event.target;
@@ -30,7 +31,12 @@ const SignIn = ({ setState }) => {
       });
       router.push("/links");
     } catch (ex) {
-      console.log(ex);
+      console.log(ex.response);
+      if (ex.response?.status === 400) {
+        setErrorMsg("Incorrect username or password.");
+      } else {
+        setErrorMsg("Something went wrong...");
+      }
     }
   }
 
@@ -60,6 +66,7 @@ const SignIn = ({ setState }) => {
             Sign in
           </button>
         </form>
+        <p className="form-error">{errorMsg}</p>
         <Info>
           Don't have an account?{" "}
           <b onClick={() => setState("SignUp")}>Sign up</b>
