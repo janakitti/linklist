@@ -3,6 +3,7 @@ import WelcomeLayout from "./welcome-layout/welcome-layout";
 import { useState } from "react";
 import axios from "axios";
 import { Router, useRouter } from "next/router";
+import { Spinner } from "react-bootstrap";
 
 const SignIn = ({ setState }) => {
   const router = useRouter();
@@ -11,6 +12,7 @@ const SignIn = ({ setState }) => {
     password: "",
   });
   const [errorMsg, setErrorMsg] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
 
   function handleChange(event) {
     const { name, value } = event.target;
@@ -19,6 +21,7 @@ const SignIn = ({ setState }) => {
 
   async function handleSubmit(event) {
     event.preventDefault();
+    setIsLoading(true);
 
     const creds = {
       email: user.email,
@@ -37,6 +40,7 @@ const SignIn = ({ setState }) => {
       } else {
         setErrorMsg("Something went wrong...");
       }
+      setIsLoading(false);
     }
   }
 
@@ -63,7 +67,11 @@ const SignIn = ({ setState }) => {
             onChange={handleChange}
           ></input>
           <button type="submit" className="primary-button-full">
-            Sign in
+            {isLoading ? (
+              <Spinner animation="border" id="spinner" />
+            ) : (
+              <>Sign in</>
+            )}
           </button>
         </form>
         <p className="form-error">{errorMsg}</p>
