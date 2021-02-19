@@ -2,6 +2,7 @@ import styled from "styled-components";
 import WelcomeLayout from "./welcome-layout/welcome-layout";
 import { useState } from "react";
 import axios from "axios";
+import { Spinner } from "react-bootstrap";
 
 const SignUp = ({ setState }) => {
   const [user, setUser] = useState({
@@ -10,6 +11,8 @@ const SignUp = ({ setState }) => {
     password: "",
     passwordConfirm: "",
   });
+  const [errorMsg, setErrorMsg] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
 
   function handleChange(event) {
     const { name, value } = event.target;
@@ -18,6 +21,7 @@ const SignUp = ({ setState }) => {
 
   async function handleSubmit(event) {
     event.preventDefault();
+    setIsLoading(true);
 
     const newUser = {
       username: user.username,
@@ -33,6 +37,12 @@ const SignUp = ({ setState }) => {
       setState("SignIn");
     } catch (ex) {
       console.log(ex);
+      if (ex.response?.status === 400) {
+        setErrorMsg("Invalid user info.");
+      } else {
+        setErrorMsg("Something went wrong...");
+      }
+      setIsLoading(false);
     }
   }
 
@@ -75,9 +85,14 @@ const SignUp = ({ setState }) => {
             onChange={handleChange}
           ></input>
           <button type="submit" className="primary-button-full">
-            Sign up
+            {isLoading ? (
+              <Spinner animation="border" id="spinner" />
+            ) : (
+              <>Sign up</>
+            )}
           </button>
         </form>
+        <p className="form-error">{errorMsg}</p>
         <Info>
           Already have an account?{" "}
           <b onClick={() => setState("SignIn")}>Sign in</b>
