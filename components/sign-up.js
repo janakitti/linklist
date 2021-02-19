@@ -59,6 +59,7 @@ const SignUp = ({ setState }) => {
             placeholder="Username"
             value={user.username}
             onChange={handleChange}
+            required
           ></input>
           <input
             className="text-input-welcome"
@@ -67,6 +68,7 @@ const SignUp = ({ setState }) => {
             placeholder="Email"
             value={user.email}
             onChange={handleChange}
+            required
           ></input>
           <input
             className="text-input-welcome"
@@ -75,6 +77,7 @@ const SignUp = ({ setState }) => {
             placeholder="Password"
             value={user.password}
             onChange={handleChange}
+            required
           ></input>
           <input
             className="text-input-welcome"
@@ -83,6 +86,7 @@ const SignUp = ({ setState }) => {
             placeholder="Confirm password"
             value={user.passwordConfirm}
             onChange={handleChange}
+            required
           ></input>
           <button type="submit" className="primary-button-full">
             {isLoading ? (
