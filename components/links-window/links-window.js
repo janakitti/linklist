@@ -5,7 +5,7 @@ import styled from "styled-components";
 import axios from "axios";
 
 const LinksWindow = ({ selected, showErrorModal, listsLength }) => {
-  const [modalShow, setModalShow] = useState(false);
+  const [editLinkModalShow, setEditLinkModalShow] = useState(false);
   const [links, setLinks] = useState([]);
   const [selectedLink, setSelectedLink] = useState({
     id: "",
@@ -17,14 +17,14 @@ const LinksWindow = ({ selected, showErrorModal, listsLength }) => {
     url: "",
   });
 
+  useEffect(async () => {
+    fetchLinks();
+  }, [selected]);
+
   function handleChange(event) {
     const { name, value } = event.target;
     setNewLink({ ...newLink, [name]: value });
   }
-
-  useEffect(async () => {
-    fetchLinks();
-  }, [selected]);
 
   const fetchLinks = async () => {
     try {
@@ -69,8 +69,8 @@ const LinksWindow = ({ selected, showErrorModal, listsLength }) => {
     }
   };
 
-  const onHide = async (id, name) => {
-    setModalShow(false);
+  const onHideEditLinkModal = async () => {
+    setEditLinkModalShow(false);
   };
 
   const linkItems = links.map((link, idx) => (
@@ -79,7 +79,7 @@ const LinksWindow = ({ selected, showErrorModal, listsLength }) => {
       _id={link._id}
       label={link.label}
       url={link.url}
-      setModalShow={setModalShow}
+      setModalShow={setEditLinkModalShow}
       setSelectedLink={setSelectedLink}
     />
   ));
@@ -111,8 +111,8 @@ const LinksWindow = ({ selected, showErrorModal, listsLength }) => {
         <></>
       )}
       <EditLinkModal
-        show={modalShow}
-        onHide={onHide}
+        show={editLinkModalShow}
+        onHide={onHideEditLinkModal}
         selectedLink={selectedLink}
         fetchLinks={fetchLinks}
         showErrorModal={showErrorModal}

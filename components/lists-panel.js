@@ -1,6 +1,5 @@
 import styled from "styled-components";
 import { useEffect, useState } from "react";
-import axios from "axios";
 import ListItem from "./list-item/list-item";
 import NewListModal from "./new-list-modal";
 
@@ -20,13 +19,13 @@ const ListsPanel = ({
     }
   }, [user.lists]);
 
-  const onSubmit = async (list) => {
+  const onSubmitNewListModal = async (list) => {
     onHide();
     handleSelect(list, lists.length);
     await fetchLists();
   };
 
-  const onHide = async () => {
+  const onHideNewListModal = async () => {
     setModalShow(false);
   };
 
@@ -35,7 +34,7 @@ const ListsPanel = ({
       key={idx}
       list={list}
       handleSelect={handleSelect}
-      selected={selectedList}
+      selectedListId={selectedList.data._id}
       index={idx}
     />
   ));
@@ -50,7 +49,11 @@ const ListsPanel = ({
         <NewListItem onClick={() => setModalShow(true)}>New list +</NewListItem>
       </ListContainer>
 
-      <NewListModal show={modalShow} onSubmit={onSubmit} onHide={onHide} />
+      <NewListModal
+        show={modalShow}
+        onSubmit={onSubmitNewListModal}
+        onHide={onHideNewListModal}
+      />
     </Panel>
   );
 };

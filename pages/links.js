@@ -1,4 +1,3 @@
-import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import ListsPanel from "../components/lists-panel";
@@ -10,8 +9,10 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 
 export default function Links() {
+  // Global error states
   const [errorModalShow, setErrorModalShow] = useState(false);
   const [errorMsg, setErrorMsg] = useState("");
+
   const [user, setUser] = useState({
     username: "",
     email: "",
@@ -50,8 +51,10 @@ export default function Links() {
     });
   };
 
+  // Logic for selecting the next list after the current is deleted
   const handleSelectAfterDelete = async (index) => {
     if (lists.length > 1) {
+      // If not top list, then select the one above deleted
       if (index > 0) {
         setSelectedList({
           data: lists[index - 1],
@@ -93,7 +96,7 @@ export default function Links() {
 
   // Refresh the lists and select one by index
   const fetchListsAndSetList = async (res, index) => {
-    handleSelect(res, index);
+    handleSelectedList(res, index);
     setLists((prevLists) => {
       prevLists[index] = res;
       return prevLists;
