@@ -8,6 +8,8 @@ import ErrorModal from "../components/error-modal";
 import styled from "styled-components";
 import { useEffect, useState } from "react";
 import axios from "axios";
+import { Provider } from "react-redux";
+import store from "./redux/store";
 
 export default function Links() {
   const [errorModalShow, setErrorModalShow] = useState(false);
@@ -113,32 +115,34 @@ export default function Links() {
   };
 
   return (
-    <FullRow>
-      <FullCol xs={3}>
-        <ListsPanel
-          user={user}
-          selected={selected}
-          handleSelect={handleSelect}
-          lists={lists}
-          fetchLists={fetchLists}
-        />
-      </FullCol>
-      <FullCol xs={6}>
-        <LinksWindow
-          selected={selected}
-          showErrorModal={showErrorModal}
-          listsLength={lists.length}
-        />
-      </FullCol>
-      <FullCol xs={3}>
-        <ListDetailPanel
-          selected={selected}
-          fetchListsAndSetList={fetchListsAndSetList}
-          handleSelectAfterDelete={handleSelectAfterDelete}
-        />
-      </FullCol>
-      <ErrorModal show={errorModalShow} onHide={onHide} errorMsg={errorMsg} />
-    </FullRow>
+    <Provider store={store}>
+      <FullRow>
+        <FullCol xs={3}>
+          <ListsPanel
+            user={user}
+            selected={selected}
+            handleSelect={handleSelect}
+            lists={lists}
+            fetchLists={fetchLists}
+          />
+        </FullCol>
+        <FullCol xs={6}>
+          <LinksWindow
+            selected={selected}
+            showErrorModal={showErrorModal}
+            listsLength={lists.length}
+          />
+        </FullCol>
+        <FullCol xs={3}>
+          <ListDetailPanel
+            selected={selected}
+            fetchListsAndSetList={fetchListsAndSetList}
+            handleSelectAfterDelete={handleSelectAfterDelete}
+          />
+        </FullCol>
+        <ErrorModal show={errorModalShow} onHide={onHide} errorMsg={errorMsg} />
+      </FullRow>
+    </Provider>
   );
 }
 
