@@ -18,7 +18,7 @@ export default function Links() {
     lists: [""],
   });
   const [lists, setLists] = useState([]);
-  const [selected, setSelected] = useState({
+  const [selectedList, setSelectedList] = useState({
     data: {
       _id: "",
       name: "",
@@ -30,6 +30,7 @@ export default function Links() {
     index: 0,
   });
 
+  // Fetch user data
   useEffect(async () => {
     try {
       const res = await axios.get("http://localhost:4000/api/users/me", {
@@ -42,8 +43,8 @@ export default function Links() {
     }
   }, []);
 
-  const handleSelect = (list, index) => {
-    setSelected({
+  const handleSelectedList = (list, index) => {
+    setSelectedList({
       data: list,
       index,
     });
@@ -52,18 +53,18 @@ export default function Links() {
   const handleSelectAfterDelete = async (index) => {
     if (lists.length > 1) {
       if (index > 0) {
-        setSelected({
+        setSelectedList({
           data: lists[index - 1],
           index: index - 1,
         });
       } else {
-        setSelected({
+        setSelectedList({
           data: lists[index + 1],
           index: index + 1,
         });
       }
     } else {
-      setSelected({
+      setSelectedList({
         data: {
           _id: "",
           name: "",
@@ -78,10 +79,6 @@ export default function Links() {
     await fetchLists();
   };
 
-  useEffect(() => {
-    console.log(selected);
-  }, [selected]);
-
   const fetchLists = async () => {
     try {
       const res = await axios.get("http://localhost:4000/api/lists", {
@@ -94,8 +91,8 @@ export default function Links() {
     }
   };
 
+  // Refresh the lists and select one by index
   const fetchListsAndSetList = async (res, index) => {
-    console.log(res);
     handleSelect(res, index);
     setLists((prevLists) => {
       prevLists[index] = res;
@@ -103,7 +100,7 @@ export default function Links() {
     });
   };
 
-  const onHide = () => {
+  const onHideErrorModal = () => {
     setErrorModalShow(false);
   };
 
@@ -117,27 +114,31 @@ export default function Links() {
       <FullCol xs={3}>
         <ListsPanel
           user={user}
-          selected={selected}
-          handleSelect={handleSelect}
+          selectedList={selectedList}
+          handleSelect={handleSelectedList}
           lists={lists}
           fetchLists={fetchLists}
         />
       </FullCol>
       <FullCol xs={6}>
         <LinksWindow
-          selected={selected}
+          selected={selectedList}
           showErrorModal={showErrorModal}
           listsLength={lists.length}
         />
       </FullCol>
       <FullCol xs={3}>
         <ListDetailPanel
-          selected={selected}
+          selected={selectedList}
           fetchListsAndSetList={fetchListsAndSetList}
           handleSelectAfterDelete={handleSelectAfterDelete}
         />
       </FullCol>
-      <ErrorModal show={errorModalShow} onHide={onHide} errorMsg={errorMsg} />
+      <ErrorModal
+        show={errorModalShow}
+        onHide={onHideErrorModal}
+        errorMsg={errorMsg}
+      />
     </FullRow>
   );
 }

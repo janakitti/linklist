@@ -90,25 +90,23 @@ const LinksWindow = ({ selected, showErrorModal, listsLength }) => {
         <div>{linkItems}</div>
       </Window>
       {listsLength ? (
-        <>
-          <div onSubmit={handleSubmit} id="new-link-container">
-            <Input
-              type="text"
-              name="label"
-              placeholder="Label"
-              value={newLink.label}
-              onChange={handleChange}
-            ></Input>
-            <Input
-              type="url"
-              name="url"
-              placeholder="URL"
-              value={newLink.url}
-              onChange={handleChange}
-            ></Input>
-            <Button type="submit">+</Button>
-          </div>
-        </>
+        <form onSubmit={handleSubmit} id="new-link-container">
+          <Input
+            type="text"
+            name="label"
+            placeholder="Label"
+            value={newLink.label}
+            onChange={handleChange}
+          ></Input>
+          <Input
+            type="url"
+            name="url"
+            placeholder="URL"
+            value={newLink.url}
+            onChange={handleChange}
+          ></Input>
+          <Button type="submit">+</Button>
+        </form>
       ) : (
         <></>
       )}

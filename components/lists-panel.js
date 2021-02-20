@@ -4,7 +4,13 @@ import axios from "axios";
 import ListItem from "./list-item/list-item";
 import NewListModal from "./new-list-modal";
 
-const ListsPanel = ({ user, selected, handleSelect, lists, fetchLists }) => {
+const ListsPanel = ({
+  user,
+  selectedList,
+  handleSelect,
+  lists,
+  fetchLists,
+}) => {
   const [modalShow, setModalShow] = useState(false);
 
   useEffect(async () => {
@@ -29,7 +35,7 @@ const ListsPanel = ({ user, selected, handleSelect, lists, fetchLists }) => {
       key={idx}
       list={list}
       handleSelect={handleSelect}
-      selected={selected}
+      selected={selectedList}
       index={idx}
     />
   ));
