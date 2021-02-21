@@ -17,7 +17,10 @@ const LinksWindow = ({ selected, showErrorModal }) => {
     label: "",
     url: "",
   });
-  const listsLength = useSelector((state) => state.lists.length);
+  const lists = useSelector((state) => state.lists.lists);
+  const listsLength = lists.length;
+  const selectedListIndex = useSelector((state) => state.lists.selectedIndex);
+  const selectedList = lists[selectedListIndex];
 
   function handleChange(event) {
     const { name, value } = event.target;
@@ -26,18 +29,19 @@ const LinksWindow = ({ selected, showErrorModal }) => {
 
   useEffect(async () => {
     fetchLinks();
-  }, [selected]);
+  }, [selectedList]);
 
   const fetchLinks = async () => {
     try {
-      if (selected.data._id) {
+      if (selectedList._id) {
         const res = await axios.get(
-          "http://localhost:4000/api/links/" + selected.data._id,
+          "http://localhost:4000/api/links/" + selectedList._id,
           {
             method: "get",
             withCredentials: true,
           }
         );
+        console.log(res);
         setLinks(res.data);
       } else {
         setLinks([]);
@@ -57,7 +61,7 @@ const LinksWindow = ({ selected, showErrorModal }) => {
     }
     try {
       const res = await axios.post(
-        "http://localhost:4000/api/links/" + selected.data._id,
+        "http://localhost:4000/api/links/" + selectedList._id,
         newLink,
         {
           withCredentials: true,

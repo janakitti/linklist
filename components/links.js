@@ -8,7 +8,7 @@ import styled from "styled-components";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
-import { setLists } from "../redux/actions";
+import { setLists, setSelectedIndex } from "../redux/actions";
 
 export default function Links() {
   const [errorModalShow, setErrorModalShow] = useState(false);
@@ -45,10 +45,7 @@ export default function Links() {
   }, []);
 
   const handleSelect = (list, index) => {
-    setSelected({
-      data: list,
-      index,
-    });
+    dispatch(setSelectedIndex(index));
   };
 
   const handleSelectAfterDelete = async (index) => {

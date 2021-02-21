@@ -8,7 +8,7 @@ import { setUser } from "../redux/actions";
 
 const ListsPanel = ({ user, selected, handleSelect, fetchLists }) => {
   const [modalShow, setModalShow] = useState(false);
-  const lists = useSelector((state) => state.lists);
+  const { lists, selectedIndex } = useSelector((state) => state.lists);
   const dispatch = useDispatch();
   useEffect(async () => {
     try {
@@ -42,9 +42,9 @@ const ListsPanel = ({ user, selected, handleSelect, fetchLists }) => {
   const listItems = lists.map((list, idx) => (
     <ListItem
       key={idx}
-      list={list}
+      listName={list.name}
       handleSelect={handleSelect}
-      selected={selected}
+      selectedIndex={selectedIndex}
       index={idx}
     />
   ));

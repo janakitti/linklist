@@ -1,22 +1,21 @@
 import styled from "styled-components";
 import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { setSelectedIndex } from "../../redux/actions";
 
-const ListItem = ({ list, handleSelect, selected, index }) => {
+const ListItem = ({ listName, handleSelect, selectedIndex, index }) => {
+  const dispatch = useDispatch();
   const toggleSelected = () => {
-    handleSelect(list, index);
+    dispatch(setSelectedIndex(index));
   };
 
-  // useEffect(() => {
-  //   console.log(selected._id);
-  //   console.log(list._id);
-  // }, [list, selected]);
   return (
     <Item
       className="list-item"
       onClick={toggleSelected}
-      selected={selected.data._id === list._id}
+      selected={selectedIndex === index}
     >
-      {list.name}
+      {listName}
     </Item>
   );
 };
