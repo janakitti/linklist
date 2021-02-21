@@ -32,7 +32,7 @@ const SignIn = ({ setState }) => {
       const res = await axios.post("http://localhost:4000/api/auth/", creds, {
         withCredentials: true,
       });
-      router.push("/links");
+      router.push("/dashboard");
     } catch (ex) {
       console.log(ex.response);
       if (ex.response?.status === 400) {

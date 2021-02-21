@@ -1,4 +1,3 @@
-import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import ListsPanel from "../components/lists-panel";
@@ -8,8 +7,8 @@ import ErrorModal from "../components/error-modal";
 import styled from "styled-components";
 import { useEffect, useState } from "react";
 import axios from "axios";
-import { Provider } from "react-redux";
-import store from "../redux/store";
+import { useDispatch, useSelector } from "react-redux";
+import { setLists } from "../redux/actions";
 
 export default function Links() {
   const [errorModalShow, setErrorModalShow] = useState(false);
@@ -19,7 +18,6 @@ export default function Links() {
     email: "",
     lists: [""],
   });
-  const [lists, setLists] = useState([]);
   const [selected, setSelected] = useState({
     data: {
       _id: "",
@@ -31,6 +29,8 @@ export default function Links() {
     },
     index: 0,
   });
+
+  const dispatch = useDispatch();
 
   useEffect(async () => {
     try {
@@ -90,7 +90,7 @@ export default function Links() {
         method: "get",
         withCredentials: true,
       });
-      await setLists(res.data);
+      dispatch(setLists(res.data));
     } catch (ex) {
       console.log(ex);
     }
@@ -115,34 +115,27 @@ export default function Links() {
   };
 
   return (
-    <Provider store={store}>
-      <FullRow>
-        <FullCol xs={3}>
-          <ListsPanel
-            user={user}
-            selected={selected}
-            handleSelect={handleSelect}
-            lists={lists}
-            fetchLists={fetchLists}
-          />
-        </FullCol>
-        <FullCol xs={6}>
-          <LinksWindow
-            selected={selected}
-            showErrorModal={showErrorModal}
-            listsLength={lists.length}
-          />
-        </FullCol>
-        <FullCol xs={3}>
-          <ListDetailPanel
-            selected={selected}
-            fetchListsAndSetList={fetchListsAndSetList}
-            handleSelectAfterDelete={handleSelectAfterDelete}
-          />
-        </FullCol>
-        <ErrorModal show={errorModalShow} onHide={onHide} errorMsg={errorMsg} />
-      </FullRow>
-    </Provider>
+    <FullRow>
+      <FullCol xs={3}>
+        <ListsPanel
+          user={user}
+          selected={selected}
+          handleSelect={handleSelect}
+          fetchLists={fetchLists}
+        />
+      </FullCol>
+      <FullCol xs={6}>
+        <LinksWindow selected={selected} showErrorModal={showErrorModal} />
+      </FullCol>
+      <FullCol xs={3}>
+        <ListDetailPanel
+          selected={selected}
+          fetchListsAndSetList={fetchListsAndSetList}
+          handleSelectAfterDelete={handleSelectAfterDelete}
+        />
+      </FullCol>
+      <ErrorModal show={errorModalShow} onHide={onHide} errorMsg={errorMsg} />
+    </FullRow>
   );
 }
 

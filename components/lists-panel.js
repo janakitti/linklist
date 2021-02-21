@@ -6,8 +6,9 @@ import NewListModal from "./new-list-modal";
 import { useDispatch, useSelector } from "react-redux";
 import { setUser } from "../redux/actions";
 
-const ListsPanel = ({ user, selected, handleSelect, lists, fetchLists }) => {
+const ListsPanel = ({ user, selected, handleSelect, fetchLists }) => {
   const [modalShow, setModalShow] = useState(false);
+  const lists = useSelector((state) => state.lists);
   const dispatch = useDispatch();
   useEffect(async () => {
     try {

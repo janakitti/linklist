@@ -3,8 +3,9 @@ import LinkItem from "../link-item/link-item";
 import EditLinkModal from "../edit-link-modal";
 import styled from "styled-components";
 import axios from "axios";
+import { useDispatch, useSelector } from "react-redux";
 
-const LinksWindow = ({ selected, showErrorModal, listsLength }) => {
+const LinksWindow = ({ selected, showErrorModal }) => {
   const [modalShow, setModalShow] = useState(false);
   const [links, setLinks] = useState([]);
   const [selectedLink, setSelectedLink] = useState({
@@ -16,6 +17,7 @@ const LinksWindow = ({ selected, showErrorModal, listsLength }) => {
     label: "",
     url: "",
   });
+  const listsLength = useSelector((state) => state.lists.length);
 
   function handleChange(event) {
     const { name, value } = event.target;
