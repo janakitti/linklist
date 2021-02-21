@@ -9,7 +9,7 @@ import styled from "styled-components";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { Provider } from "react-redux";
-import store from "./redux/store";
+import store from "../redux/store";
 
 export default function Links() {
   const [errorModalShow, setErrorModalShow] = useState(false);
