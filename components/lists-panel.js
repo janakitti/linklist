@@ -3,9 +3,23 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import ListItem from "./list-item/list-item";
 import NewListModal from "./new-list-modal";
+import { useDispatch, useSelector } from "react-redux";
+import { setUser } from "../redux/actions";
 
 const ListsPanel = ({ user, selected, handleSelect, lists, fetchLists }) => {
   const [modalShow, setModalShow] = useState(false);
+  const dispatch = useDispatch();
+  useEffect(async () => {
+    try {
+      const res = await axios.get("http://localhost:4000/api/users/me", {
+        method: "get",
+        withCredentials: true,
+      });
+      dispatch(setUser(res.data));
+    } catch (ex) {
+      console.log(ex);
+    }
+  }, []);
 
   useEffect(async () => {
     await fetchLists();

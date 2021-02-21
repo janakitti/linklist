@@ -6,6 +6,7 @@ import Image from "next/image";
 import Snackbar from "@material-ui/core/Snackbar";
 import Slide from "@material-ui/core/Slide";
 import DeleteListModal from "../delete-list-modal";
+import { useDispatch, useSelector } from "react-redux";
 
 const ListDetailPanel = ({
   selected,
@@ -20,6 +21,7 @@ const ListDetailPanel = ({
     Transition: Slide,
   });
   const [modalShow, setModalShow] = useState(false);
+  const user = useSelector((state) => state.user);
 
   const handleClose = () => {
     setState({
