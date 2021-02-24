@@ -8,11 +8,7 @@ import Slide from "@material-ui/core/Slide";
 import DeleteListModal from "../delete-list-modal";
 import { useDispatch, useSelector } from "react-redux";
 
-const ListDetailPanel = ({
-  selected,
-  fetchListsAndSetList,
-  handleSelectAfterDelete,
-}) => {
+const ListDetailPanel = ({ fetchListsAndSetList, handleSelectAfterDelete }) => {
   const [isPublishing, setIsPublishing] = useState(false);
   const [isPublished, setIsPublished] = useState(false);
   const [publicLink, setPublicLink] = useState("");
@@ -21,7 +17,11 @@ const ListDetailPanel = ({
     Transition: Slide,
   });
   const [modalShow, setModalShow] = useState(false);
-  const user = useSelector((state) => state.user);
+
+  const lists = useSelector((state) => state.lists.lists);
+  const selectedListIndex = useSelector((state) => state.lists.selectedIndex);
+  const selectedList = lists[selectedListIndex];
+  console.log(selectedList);
 
   const handleClose = () => {
     setState({
@@ -30,19 +30,19 @@ const ListDetailPanel = ({
     });
   };
 
-  useEffect(() => {
-    setPublicLink(selected.data.publicListId ? selected.data.publicListId : "");
-    setIsPublished(!!selected.data.publicListId);
-    console.log(!!selected.data.publicListId);
-  }, [selected.data.publicListId]);
+  // useEffect(() => {
+  //   setPublicLink(selectedList.publicListId ? selectedList.publicListId : "");
+  //   setIsPublished(!!selectedList.publicListId);
+  //   console.log(!!selectedList.publicListId);
+  // }, [selectedList.publicListId]);
 
   const publish = async () => {
     setIsPublishing(true);
-    if (selected.data.publicListId) {
+    if (selectedList.publicListId) {
       try {
-        if (selected) {
+        if (selectedList) {
           const res = await axios.put(
-            "http://localhost:4000/api/l/" + selected.data._id,
+            "http://localhost:4000/api/l/" + selectedList._id,
             {},
             {
               method: "put",
@@ -55,16 +55,16 @@ const ListDetailPanel = ({
       }
     } else {
       try {
-        if (selected) {
+        if (selectedList) {
           const res = await axios.post(
-            "http://localhost:4000/api/l/" + selected.data._id,
+            "http://localhost:4000/api/l/" + selectedList._id,
             {},
             {
               method: "post",
               withCredentials: true,
             }
           );
-          await fetchListsAndSetList(res.data.privateList, selected.index);
+          await fetchListsAndSetList(res.data.privateList, selectedList.index);
           console.log(res);
         }
       } catch (ex) {
@@ -94,11 +94,11 @@ const ListDetailPanel = ({
   return (
     <Panel>
       <Profile>
-        <Name>{selected.data.name}</Name>
-        <div>{selected.data.isPublished}</div>
+        <Name>{selectedList.name}</Name>
+        <div>{selectedList.isPublished}</div>
       </Profile>
       <div id="publish-container">
-        {selected.data._id ? (
+        {selectedList._id ? (
           isPublishing ? (
             <Spinner animation="border" id="spinner" />
           ) : isPublished ? (
@@ -126,7 +126,7 @@ const ListDetailPanel = ({
         )}
       </div>
       <>
-        {selected.data._id ? (
+        {selectedList._id ? (
           <>
             <button
               type="submit"
@@ -168,7 +168,7 @@ const ListDetailPanel = ({
       <DeleteListModal
         show={modalShow}
         onDelete={onDelete}
-        list={selected}
+        list={selectedList}
         onHide={onHide}
       />
     </Panel>

@@ -5,7 +5,7 @@ import styled from "styled-components";
 import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
 
-const LinksWindow = ({ selected, showErrorModal }) => {
+const LinksWindow = ({ showErrorModal }) => {
   const [modalShow, setModalShow] = useState(false);
   const [links, setLinks] = useState([]);
   const [selectedLink, setSelectedLink] = useState({

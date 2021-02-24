@@ -11,27 +11,15 @@ import { useDispatch, useSelector } from "react-redux";
 import { setLists, setSelectedIndex } from "../redux/actions";
 
 export default function Links() {
-  const [errorModalShow, setErrorModalShow] = useState(false);
-  const [errorMsg, setErrorMsg] = useState("");
   const [user, setUser] = useState({
     username: "",
     email: "",
     lists: [""],
   });
-  const [selected, setSelected] = useState({
-    data: {
-      _id: "",
-      name: "",
-      owner: "",
-      links: [],
-      publicListId: "",
-      isPublished: "",
-    },
-    index: 0,
-  });
 
   const dispatch = useDispatch();
 
+  // Fetch User data on mount
   useEffect(async () => {
     try {
       const res = await axios.get("http://localhost:4000/api/users/me", {
@@ -48,6 +36,7 @@ export default function Links() {
     dispatch(setSelectedIndex(index));
   };
 
+  // Logic for selecting the next list after current is deleted
   const handleSelectAfterDelete = async (index) => {
     if (lists.length > 1) {
       if (index > 0) {
@@ -77,10 +66,6 @@ export default function Links() {
     await fetchLists();
   };
 
-  useEffect(() => {
-    console.log(selected);
-  }, [selected]);
-
   const fetchLists = async () => {
     try {
       const res = await axios.get("http://localhost:4000/api/lists", {
@@ -93,6 +78,7 @@ export default function Links() {
     }
   };
 
+  // Fetch and select a specified list by index
   const fetchListsAndSetList = async (res, index) => {
     console.log(res);
     handleSelect(res, index);
@@ -102,7 +88,11 @@ export default function Links() {
     });
   };
 
-  const onHide = () => {
+  // Global error modal
+  const [errorModalShow, setErrorModalShow] = useState(false);
+  const [errorMsg, setErrorMsg] = useState("");
+
+  const onErrorModalHide = () => {
     setErrorModalShow(false);
   };
 
@@ -116,22 +106,24 @@ export default function Links() {
       <FullCol xs={3}>
         <ListsPanel
           user={user}
-          selected={selected}
           handleSelect={handleSelect}
           fetchLists={fetchLists}
         />
       </FullCol>
       <FullCol xs={6}>
-        <LinksWindow selected={selected} showErrorModal={showErrorModal} />
+        <LinksWindow showErrorModal={showErrorModal} />
       </FullCol>
       <FullCol xs={3}>
         <ListDetailPanel
-          selected={selected}
           fetchListsAndSetList={fetchListsAndSetList}
           handleSelectAfterDelete={handleSelectAfterDelete}
         />
       </FullCol>
-      <ErrorModal show={errorModalShow} onHide={onHide} errorMsg={errorMsg} />
+      <ErrorModal
+        show={errorModalShow}
+        onHide={onErrorModalHide}
+        errorMsg={errorMsg}
+      />
     </FullRow>
   );
 }
