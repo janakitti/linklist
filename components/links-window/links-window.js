@@ -97,7 +97,7 @@ const LinksWindow = ({ showErrorModal }) => {
       </Window>
       {listsLength ? (
         <>
-          <div onSubmit={handleSubmit} id="new-link-container">
+          <form onSubmit={handleSubmit} id="new-link-container">
             <Input
               type="text"
               name="label"
@@ -113,7 +113,7 @@ const LinksWindow = ({ showErrorModal }) => {
               onChange={handleChange}
             ></Input>
             <Button type="submit">+</Button>
-          </div>
+          </form>
         </>
       ) : (
         <></>
