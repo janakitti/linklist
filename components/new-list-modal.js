@@ -3,7 +3,7 @@ import { useState } from "react";
 import styled from "styled-components";
 import axios from "axios";
 
-const NewListModal = (props) => {
+const NewListModal = ({ show, onAddNewList, onHide }) => {
   const [newList, setNewList] = useState("");
 
   const handleChange = async (event) => {
@@ -19,9 +19,8 @@ const NewListModal = (props) => {
       const res = await axios.post("http://localhost:4000/api/lists", name, {
         withCredentials: true,
       });
-      console.log(res);
       setNewList("");
-      props.onSubmit(res.data);
+      onAddNewList(res.data);
     } catch (ex) {
       console.log(ex);
     }
@@ -29,7 +28,8 @@ const NewListModal = (props) => {
 
   return (
     <Modal
-      {...props}
+      show={show}
+      onHide={onHide}
       size="md"
       aria-labelledby="contained-modal-title-vcenter"
       centered

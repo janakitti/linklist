@@ -20,7 +20,14 @@ const ListDetailPanel = ({ fetchListsAndSetList, handleSelectAfterDelete }) => {
 
   const lists = useSelector((state) => state.lists.lists);
   const selectedListIndex = useSelector((state) => state.lists.selectedIndex);
-  const selectedList = lists[selectedListIndex];
+  const selectedList = lists[selectedListIndex]
+    ? lists[selectedListIndex]
+    : {
+        isPublished: false,
+        links: [],
+        name: "",
+        _id: "",
+      };
   console.log(selectedList);
 
   const handleClose = () => {
