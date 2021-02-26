@@ -32,7 +32,7 @@ export default function Links() {
     }
   }, []);
 
-  const handleSelect = (list, index) => {
+  const handleSelect = (index) => {
     dispatch(setSelectedIndex(index));
   };
 
@@ -73,11 +73,9 @@ export default function Links() {
   // Global error modal
   const [errorModalShow, setErrorModalShow] = useState(false);
   const [errorMsg, setErrorMsg] = useState("");
-
   const onErrorModalHide = () => {
     setErrorModalShow(false);
   };
-
   const showErrorModal = (msg) => {
     setErrorMsg(msg);
     setErrorModalShow(true);

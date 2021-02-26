@@ -6,18 +6,15 @@ import Image from "next/image";
 import Snackbar from "@material-ui/core/Snackbar";
 import Slide from "@material-ui/core/Slide";
 import DeleteListModal from "../delete-list-modal";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 
 const ListDetailPanel = ({ fetchListsAndSetList, handleSelectAfterDelete }) => {
-  const [isPublishing, setIsPublishing] = useState(false);
-  const [isPublished, setIsPublished] = useState(false);
+  // Public link publishing states
+  const [isPublishing, setIsPublishing] = useState(false); // For loading spinner
+  const [isPublished, setIsPublished] = useState(false); // For graphic display
   const [publicLink, setPublicLink] = useState("");
-  const [state, setState] = useState({
-    open: false,
-    Transition: Slide,
-  });
-  const [modalShow, setModalShow] = useState(false);
 
+  // List states
   const lists = useSelector((state) => state.lists.lists);
   const selectedListIndex = useSelector((state) => state.lists.selectedIndex);
   const selectedList = lists[selectedListIndex]
@@ -28,14 +25,6 @@ const ListDetailPanel = ({ fetchListsAndSetList, handleSelectAfterDelete }) => {
         name: "",
         _id: "",
       };
-  console.log(selectedList);
-
-  const handleClose = () => {
-    setState({
-      ...state,
-      open: false,
-    });
-  };
 
   useEffect(() => {
     setPublicLink(selectedList.publicListId ? selectedList.publicListId : "");
@@ -81,21 +70,33 @@ const ListDetailPanel = ({ fetchListsAndSetList, handleSelectAfterDelete }) => {
     setIsPublishing(false);
   };
 
+  // Copy public link
+  const [snackbarState, setSnackbarState] = useState({
+    open: false,
+    Transition: Slide,
+  });
+  const copyPublicLink = () => {
+    navigator.clipboard.writeText(publicLink);
+    setSnackbarState({
+      ...snackbarState,
+      open: true,
+    });
+  };
+  const handleClose = () => {
+    setSnackbarState({
+      ...snackbarState,
+      open: false,
+    });
+  };
+
+  // Delete list modal
+  const [deleteListModalShow, setDeleteListModalShow] = useState(false);
   const onDelete = async () => {
     await handleSelectAfterDelete(selectedListIndex);
     onHide();
   };
-
   const onHide = async () => {
-    setModalShow(false);
-  };
-
-  const copyPublicLink = () => {
-    navigator.clipboard.writeText(publicLink);
-    setState({
-      ...state,
-      open: true,
-    });
+    setDeleteListModalShow(false);
   };
 
   return (
@@ -153,7 +154,7 @@ const ListDetailPanel = ({ fetchListsAndSetList, handleSelectAfterDelete }) => {
             ></input>
             <button
               type="submit"
-              onClick={() => setModalShow(true)}
+              onClick={() => setDeleteListModalShow(true)}
               className="delete-button-auto"
             >
               Delete
@@ -165,15 +166,15 @@ const ListDetailPanel = ({ fetchListsAndSetList, handleSelectAfterDelete }) => {
       </>
 
       <Snackbar
-        open={state.open}
+        open={snackbarState.open}
         onClose={handleClose}
-        TransitionComponent={state.Transition}
+        TransitionComponent={snackbarState.Transition}
         message="Copied!"
-        key={state.Transition.name}
+        key={snackbarState.Transition.name}
         autoHideDuration={2000}
       />
       <DeleteListModal
-        show={modalShow}
+        show={deleteListModalShow}
         onDelete={onDelete}
         list={selectedList}
         onHide={onHide}

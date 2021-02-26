@@ -7,9 +7,9 @@ import { useDispatch, useSelector } from "react-redux";
 import { setUser } from "../redux/actions";
 
 const ListsPanel = ({ user, handleSelect, fetchLists }) => {
-  const [modalShow, setModalShow] = useState(false);
   const { lists, selectedIndex } = useSelector((state) => state.lists);
   const dispatch = useDispatch();
+
   useEffect(async () => {
     try {
       const res = await axios.get("http://localhost:4000/api/users/me", {
@@ -25,18 +25,19 @@ const ListsPanel = ({ user, handleSelect, fetchLists }) => {
   useEffect(async () => {
     await fetchLists();
     if (lists.length != 0) {
-      handleSelect(lists[0], 0);
+      handleSelect(0);
     }
   }, [user.lists]);
 
+  // New list modal
+  const [newListModalShow, setNewListModalShow] = useState(false);
   const onAddNewList = async (list) => {
     onHide();
-    handleSelect(list, lists.length);
+    handleSelect(lists.length);
     await fetchLists();
   };
-
   const onHide = async () => {
-    setModalShow(false);
+    setNewListModalShow(false);
   };
 
   const listItems = lists.map((list, idx) => (
@@ -56,11 +57,13 @@ const ListsPanel = ({ user, handleSelect, fetchLists }) => {
       </Profile>
       <ListContainer>
         {listItems}
-        <NewListItem onClick={() => setModalShow(true)}>New list +</NewListItem>
+        <NewListItem onClick={() => setNewListModalShow(true)}>
+          New list +
+        </NewListItem>
       </ListContainer>
 
       <NewListModal
-        show={modalShow}
+        show={newListModalShow}
         onAddNewList={onAddNewList}
         onHide={onHide}
       />

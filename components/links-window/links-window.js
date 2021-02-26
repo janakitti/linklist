@@ -3,10 +3,16 @@ import LinkItem from "../link-item/link-item";
 import EditLinkModal from "../edit-link-modal";
 import styled from "styled-components";
 import axios from "axios";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 
 const LinksWindow = ({ showErrorModal }) => {
-  const [modalShow, setModalShow] = useState(false);
+  // List states
+  const lists = useSelector((state) => state.lists.lists);
+  const listsLength = lists.length;
+  const selectedListIndex = useSelector((state) => state.lists.selectedIndex);
+  const selectedList = lists[selectedListIndex];
+
+  // Link states
   const [links, setLinks] = useState([]);
   const [selectedLink, setSelectedLink] = useState({
     id: "",
@@ -17,19 +23,17 @@ const LinksWindow = ({ showErrorModal }) => {
     label: "",
     url: "",
   });
-  const lists = useSelector((state) => state.lists.lists);
-  const listsLength = lists.length;
-  const selectedListIndex = useSelector((state) => state.lists.selectedIndex);
-  const selectedList = lists[selectedListIndex];
 
+  // Initial link fetch
+  useEffect(async () => {
+    fetchLinks();
+  }, [selectedList]);
+
+  // New link form handler
   function handleChange(event) {
     const { name, value } = event.target;
     setNewLink({ ...newLink, [name]: value });
   }
-
-  useEffect(async () => {
-    fetchLinks();
-  }, [selectedList]);
 
   const fetchLinks = async () => {
     try {
@@ -51,6 +55,7 @@ const LinksWindow = ({ showErrorModal }) => {
     }
   };
 
+  // New link submission
   const handleSubmit = async (event) => {
     event.preventDefault();
     if (newLink.label?.length < 5) {
@@ -67,7 +72,6 @@ const LinksWindow = ({ showErrorModal }) => {
           withCredentials: true,
         }
       );
-      console.log(res);
       setNewLink({ label: "", url: "" });
       fetchLinks();
     } catch (ex) {
@@ -75,17 +79,20 @@ const LinksWindow = ({ showErrorModal }) => {
     }
   };
 
+  // Edit link modal
+  const [editLinkModalShow, setEditLinkModalShow] = useState(false);
   const onHide = async (id, name) => {
-    setModalShow(false);
+    setEditLinkModalShow(false);
   };
 
+  // Generate link JSX elements
   const linkItems = links.map((link, idx) => (
     <LinkItem
       key={idx}
       _id={link._id}
       label={link.label}
       url={link.url}
-      setModalShow={setModalShow}
+      setModalShow={setEditLinkModalShow}
       setSelectedLink={setSelectedLink}
     />
   ));
@@ -120,7 +127,7 @@ const LinksWindow = ({ showErrorModal }) => {
         <></>
       )}
       <EditLinkModal
-        show={modalShow}
+        show={editLinkModalShow}
         onHide={onHide}
         selectedLink={selectedLink}
         fetchLinks={fetchLinks}
