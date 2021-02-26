@@ -37,11 +37,11 @@ const ListDetailPanel = ({ fetchListsAndSetList, handleSelectAfterDelete }) => {
     });
   };
 
-  // useEffect(() => {
-  //   setPublicLink(selectedList.publicListId ? selectedList.publicListId : "");
-  //   setIsPublished(!!selectedList.publicListId);
-  //   console.log(!!selectedList.publicListId);
-  // }, [selectedList.publicListId]);
+  useEffect(() => {
+    setPublicLink(selectedList.publicListId ? selectedList.publicListId : "");
+    setIsPublished(!!selectedList.publicListId);
+    console.log(!!selectedList.publicListId);
+  }, [selectedList.publicListId]);
 
   const publish = async () => {
     setIsPublishing(true);
