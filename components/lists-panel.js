@@ -91,7 +91,7 @@ const Name = styled.h1`
 `;
 
 const ListContainer = styled.div`
-  height: 30em;
+  height: 70vh;
   margin: 0 -2em;
   padding: 0 2em;
   overflow-y: scroll;
