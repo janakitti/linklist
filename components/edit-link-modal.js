@@ -14,7 +14,6 @@ const EditLinkModal = ({
 }) => {
   const dispatch = useDispatch();
 
-  const [newList, setNewList] = useState("");
   const [editedLink, setEditedLink] = useState({
     label: "",
     url: "",
@@ -30,10 +29,6 @@ const EditLinkModal = ({
   const handleChange = async (event) => {
     const { name, value } = event.target;
     setEditedLink({ ...editedLink, [name]: value });
-  };
-
-  const handleSubmit = async (event) => {
-    event.preventDefault();
   };
 
   const handleDelete = async () => {
