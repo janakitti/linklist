@@ -92,11 +92,12 @@ const LinksWindow = ({ showErrorModal }) => {
 
   return (
     <>
-      <Window>
-        <div>{linkItems}</div>
-      </Window>
       {listsLength ? (
         <>
+          <Window>
+            <div>{linkItems}</div>
+          </Window>
+
           <form onSubmit={handleSubmit} id="new-link-container">
             <Input
               type="text"
