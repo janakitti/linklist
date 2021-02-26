@@ -12,16 +12,16 @@ const DeleteListModal = ({ show, onDelete, list, onHide }) => {
 
   const handleDelete = async (event) => {
     event.preventDefault();
-    console.log("Dwdd");
+    console.log(list);
     try {
       const res = await axios.delete(
-        "http://localhost:4000/api/lists/" + list.data._id,
+        "http://localhost:4000/api/lists/" + list._id,
         {
           withCredentials: true,
         }
       );
       console.log(res);
-      await onDelete(list.index);
+      await onDelete();
     } catch (ex) {
       console.log(ex);
     }

@@ -16,7 +16,7 @@ export default function Links() {
     email: "",
     lists: [""],
   });
-
+  const lists = useSelector((state) => state.lists.lists);
   const dispatch = useDispatch();
 
   // Fetch User data on mount
@@ -40,28 +40,12 @@ export default function Links() {
   const handleSelectAfterDelete = async (index) => {
     if (lists.length > 1) {
       if (index > 0) {
-        setSelected({
-          data: lists[index - 1],
-          index: index - 1,
-        });
+        dispatch(setSelectedIndex(index - 1));
       } else {
-        setSelected({
-          data: lists[index + 1],
-          index: index + 1,
-        });
+        dispatch(setSelectedIndex(index));
       }
     } else {
-      setSelected({
-        data: {
-          _id: "",
-          name: "",
-          owner: "",
-          links: [],
-          publicListId: "",
-          isPublished: "",
-        },
-        index: 0,
-      });
+      dispatch(setSelectedIndex(0));
     }
     await fetchLists();
   };
@@ -81,11 +65,9 @@ export default function Links() {
   // Fetch and select a specified list by index
   const fetchListsAndSetList = async (res, index) => {
     console.log(res);
-    handleSelect(res, index);
-    setLists((prevLists) => {
-      prevLists[index] = res;
-      return prevLists;
-    });
+    lists[index] = res;
+    dispatch(setLists(lists));
+    dispatch(setSelectedIndex(index));
   };
 
   // Global error modal

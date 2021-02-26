@@ -71,7 +71,7 @@ const ListDetailPanel = ({ fetchListsAndSetList, handleSelectAfterDelete }) => {
               withCredentials: true,
             }
           );
-          await fetchListsAndSetList(res.data.privateList, selectedList.index);
+          await fetchListsAndSetList(res.data.privateList, selectedListIndex);
           console.log(res);
         }
       } catch (ex) {
@@ -81,8 +81,8 @@ const ListDetailPanel = ({ fetchListsAndSetList, handleSelectAfterDelete }) => {
     setIsPublishing(false);
   };
 
-  const onDelete = async (index) => {
-    await handleSelectAfterDelete(index);
+  const onDelete = async () => {
+    await handleSelectAfterDelete(selectedListIndex);
     onHide();
   };
 
