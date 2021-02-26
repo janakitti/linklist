@@ -36,8 +36,9 @@ const LinksWindow = ({ showErrorModal }) => {
   }
 
   const fetchLinks = async () => {
+    console.log(selectedList);
     try {
-      if (selectedList._id) {
+      if (selectedList?._id) {
         const res = await axios.get(
           "http://localhost:4000/api/links/" + selectedList._id,
           {

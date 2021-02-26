@@ -33,8 +33,8 @@ const ListsPanel = ({ user, handleSelect, fetchLists }) => {
   const [newListModalShow, setNewListModalShow] = useState(false);
   const onAddNewList = async (list) => {
     onHide();
-    handleSelect(lists.length);
     await fetchLists();
+    handleSelect(lists.length);
   };
   const onHide = async () => {
     setNewListModalShow(false);
