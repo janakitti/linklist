@@ -1,4 +1,10 @@
-import { SET_USER, SET_LISTS, SET_SELECTED_INDEX } from "./actionTypes";
+import {
+  SET_USER,
+  SET_LISTS,
+  SET_SELECTED_INDEX,
+  SET_ERROR_MSG,
+  SET_ERROR_SHOW,
+} from "./actionTypes";
 
 export const setUser = (user) => ({
   type: SET_USER,
@@ -13,4 +19,14 @@ export const setLists = (lists) => ({
 export const setSelectedIndex = (index) => ({
   type: SET_SELECTED_INDEX,
   payload: index,
+});
+
+export const setErrorMsg = (msg) => ({
+  type: SET_ERROR_MSG,
+  payload: msg,
+});
+
+export const setErrorModalShow = (isShowing) => ({
+  type: SET_ERROR_SHOW,
+  payload: isShowing,
 });

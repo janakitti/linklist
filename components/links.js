@@ -8,7 +8,11 @@ import styled from "styled-components";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
-import { setLists, setSelectedIndex } from "../redux/actions";
+import {
+  setLists,
+  setSelectedIndex,
+  setErrorModalShow,
+} from "../redux/actions";
 
 export default function Links() {
   const [user, setUser] = useState({
@@ -71,8 +75,8 @@ export default function Links() {
   };
 
   // Global error modal
-  const [errorModalShow, setErrorModalShow] = useState(false);
-  const [errorMsg, setErrorMsg] = useState("");
+  const errorMsg = useSelector((state) => state.error.msg);
+  const errorModalShow = useSelector((state) => state.error.isShowing);
   const onErrorModalHide = () => {
     setErrorModalShow(false);
   };
@@ -101,7 +105,7 @@ export default function Links() {
       </FullCol>
       <ErrorModal
         show={errorModalShow}
-        onHide={onErrorModalHide}
+        onHide={() => dispatch(setErrorModalShow(false))}
         errorMsg={errorMsg}
       />
     </FullRow>

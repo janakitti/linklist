@@ -3,9 +3,12 @@ import LinkItem from "../link-item/link-item";
 import EditLinkModal from "../edit-link-modal";
 import styled from "styled-components";
 import axios from "axios";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+import { setErrorMsg } from "../../redux/actions";
 
 const LinksWindow = ({ showErrorModal }) => {
+  const dispatch = useDispatch();
+
   // List states
   const lists = useSelector((state) => state.lists.lists);
   const listsLength = lists.length;
@@ -60,8 +63,8 @@ const LinksWindow = ({ showErrorModal }) => {
   const handleSubmit = async (event) => {
     event.preventDefault();
     if (newLink.label?.length < 5) {
-      showErrorModal(
-        "Your link label has got to be at least 5 characters long!"
+      dispatch(
+        setErrorMsg("Your link label has got to be at least 5 characters long!")
       );
       return;
     }

@@ -2,6 +2,8 @@ import Modal from "react-bootstrap/Modal";
 import { useState, useEffect } from "react";
 import styled from "styled-components";
 import axios from "axios";
+import { useSelector, useDispatch } from "react-redux";
+import { setErrorMsg } from "../redux/actions";
 
 const EditLinkModal = ({
   show,
@@ -10,6 +12,8 @@ const EditLinkModal = ({
   fetchLinks,
   showErrorModal,
 }) => {
+  const dispatch = useDispatch();
+
   const [newList, setNewList] = useState("");
   const [editedLink, setEditedLink] = useState({
     label: "",
@@ -49,8 +53,8 @@ const EditLinkModal = ({
 
   const handleEdit = async () => {
     if (editedLink.label?.length < 5) {
-      showErrorModal(
-        "Your link label has got to be at least 5 characters long!"
+      dispatch(
+        setErrorMsg("Your link label has got to be at least 5 characters long!")
       );
       return;
     }
@@ -91,7 +95,7 @@ const EditLinkModal = ({
         ></input>
         <input
           className="text-input-modal"
-          type="text"
+          type="url"
           name="url"
           placeholder="Edit URL"
           value={editedLink.url}
