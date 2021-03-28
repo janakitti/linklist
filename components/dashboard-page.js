@@ -14,7 +14,7 @@ import {
   setErrorModalShow,
 } from "../redux/actions";
 
-export default function Links() {
+export default function DashboardPage() {
   const [user, setUser] = useState({
     username: "",
     email: "",
