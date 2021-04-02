@@ -29,7 +29,7 @@ const ListDetailPanel = ({ fetchListsAndSetList, handleSelectAfterDelete }) => {
   useEffect(() => {
     setPublicLink(
       selectedList.publicListId
-        ? "http://localhost:3000/l?id=" + selectedList.publicListId
+        ? process.env.NEXT_PUBLIC_BASE_PUBLISHED_URL + selectedList.publicListId
         : ""
     );
     setIsPublished(!!selectedList.publicListId);
