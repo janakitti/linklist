@@ -27,9 +27,12 @@ const ListDetailPanel = ({ fetchListsAndSetList, handleSelectAfterDelete }) => {
       };
 
   useEffect(() => {
-    setPublicLink(selectedList.publicListId ? selectedList.publicListId : "");
+    setPublicLink(
+      selectedList.publicListId
+        ? "http://localhost:3000/l?id=" + selectedList.publicListId
+        : ""
+    );
     setIsPublished(!!selectedList.publicListId);
-    console.log(!!selectedList.publicListId);
   }, [selectedList.publicListId]);
 
   const publish = async () => {
