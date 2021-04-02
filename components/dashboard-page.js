@@ -13,6 +13,7 @@ import {
   setSelectedIndex,
   setErrorModalShow,
 } from "../redux/actions";
+import api from "../utils/api";
 
 export default function DashboardPage() {
   const [user, setUser] = useState({
@@ -26,7 +27,7 @@ export default function DashboardPage() {
   // Fetch User data on mount
   useEffect(async () => {
     try {
-      const res = await axios.get("http://localhost:4000/api/users/me", {
+      const res = await api.get("/users/me", {
         method: "get",
         withCredentials: true,
       });
@@ -56,7 +57,7 @@ export default function DashboardPage() {
 
   const fetchLists = async () => {
     try {
-      const res = await axios.get("http://localhost:4000/api/lists", {
+      const res = await api.get("/lists", {
         method: "get",
         withCredentials: true,
       });

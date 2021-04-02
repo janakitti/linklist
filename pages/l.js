@@ -5,6 +5,7 @@ import { useEffect, useState } from "react";
 import PublicLinkItem from "../components/public-link-item/public-link-item";
 import axios from "axios";
 import styled from "styled-components";
+import api from "../utils/api";
 
 const PublicList = () => {
   const router = useRouter();
@@ -18,7 +19,7 @@ const PublicList = () => {
   useEffect(async () => {
     try {
       if (id) {
-        const res = await axios.get("http://localhost:4000/api/l/" + id);
+        const res = await api.get("/l/" + id);
         setList(res.data);
       }
     } catch (ex) {

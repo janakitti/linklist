@@ -5,6 +5,7 @@ import styled from "styled-components";
 import axios from "axios";
 import { useSelector, useDispatch } from "react-redux";
 import { setErrorMsg } from "../../redux/actions";
+import api from "../../utils/api";
 
 const LinksWindow = ({ showErrorModal }) => {
   const dispatch = useDispatch();
@@ -42,13 +43,10 @@ const LinksWindow = ({ showErrorModal }) => {
     console.log(selectedList);
     try {
       if (selectedList?._id) {
-        const res = await axios.get(
-          "http://localhost:4000/api/links/" + selectedList._id,
-          {
-            method: "get",
-            withCredentials: true,
-          }
-        );
+        const res = await api.get("/links/" + selectedList._id, {
+          method: "get",
+          withCredentials: true,
+        });
         console.log(res);
         setLinks(res.data);
       } else {
