@@ -4,9 +4,9 @@ import { Spinner } from "react-bootstrap";
 import Image from "next/image";
 import Snackbar from "@material-ui/core/Snackbar";
 import Slide from "@material-ui/core/Slide";
-import DeleteListModal from "../delete-list-modal";
+import DeleteListModal from "../../modals/delete-list-modal/delete-list-modal";
 import { useSelector } from "react-redux";
-import api from "../../utils/api";
+import api from "../../../utils/api";
 
 const ListDetailPanel = ({ fetchListsAndSetList, handleSelectAfterDelete }) => {
   // Public link publishing states

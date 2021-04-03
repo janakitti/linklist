@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import Kebab from "../../icons/kebab";
+import Kebab from "../../../../icons/kebab";
 
 const LinkItem = ({ _id, label, url, setModalShow, setSelectedLink }) => {
   return (

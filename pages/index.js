@@ -1,8 +1,8 @@
 import Head from "next/head";
 import styles from "../styles/Home.module.css";
 import { useState } from "react";
-import SignIn from "../components/sign-in";
-import SignUp from "../components/sign-up";
+import SignIn from "../components/welcome-layout/sign-in/sign-in";
+import SignUp from "../components/welcome-layout/sign-up/sign-up";
 
 export default function Home() {
   const [state, setState] = useState("SignUp");

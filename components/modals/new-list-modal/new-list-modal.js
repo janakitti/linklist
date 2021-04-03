@@ -1,7 +1,7 @@
 import Modal from "react-bootstrap/Modal";
 import { useState } from "react";
 import styled from "styled-components";
-import api from "../utils/api";
+import api from "../../../utils/api";
 
 const NewListModal = ({ show, onAddNewList, onHide }) => {
   const [newList, setNewList] = useState("");

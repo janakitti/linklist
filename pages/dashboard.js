@@ -1,4 +1,4 @@
-import DashboardPage from "../components/dashboard-page";
+import DashboardPage from "../components/dashboard-page/dashboard-page";
 import { Provider } from "react-redux";
 import store from "../redux/store";
 

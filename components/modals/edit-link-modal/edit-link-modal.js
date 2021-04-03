@@ -2,8 +2,8 @@ import Modal from "react-bootstrap/Modal";
 import { useState, useEffect } from "react";
 import styled from "styled-components";
 import { useSelector, useDispatch } from "react-redux";
-import { setErrorMsg } from "../redux/actions";
-import api from "../utils/api";
+import { setErrorMsg } from "../../../redux/actions";
+import api from "../../../utils/api";
 
 const EditLinkModal = ({
   show,

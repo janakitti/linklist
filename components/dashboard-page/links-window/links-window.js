@@ -1,10 +1,10 @@
 import { useState, useEffect } from "react";
-import LinkItem from "../link-item/link-item";
-import EditLinkModal from "../edit-link-modal";
+import LinkItem from "./link-item/link-item";
+import EditLinkModal from "../../modals/edit-link-modal/edit-link-modal";
 import styled from "styled-components";
 import { useSelector, useDispatch } from "react-redux";
-import { setErrorMsg } from "../../redux/actions";
-import api from "../../utils/api";
+import { setErrorMsg } from "../../../redux/actions";
+import api from "../../../utils/api";
 
 const LinksWindow = ({ showErrorModal }) => {
   const dispatch = useDispatch();

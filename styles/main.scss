@@ -1,9 +1,9 @@
 @import "./variables";
 @import "../components/welcome-layout/welcome-layout.scss";
-@import "../components/link-item/link-item.scss";
-@import "../components/list-item/list-item.scss";
-@import "../components/list-detail-panel/list-detail-panel.scss";
-@import "../components/links-window/links-window.scss";
+@import "../components/dashboard-page/links-window/link-item/link-item.scss";
+@import "../components/dashboard-page/list-item/list-item.scss";
+@import "../components/dashboard-page/list-detail-panel/list-detail-panel.scss";
+@import "../components/dashboard-page/links-window/links-window.scss";
 
 .h-hint {
   align-self: center;

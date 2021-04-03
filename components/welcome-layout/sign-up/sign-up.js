@@ -1,15 +1,15 @@
 import styled from "styled-components";
-import WelcomeLayout from "./welcome-layout/welcome-layout";
+import WelcomeLayout from "../welcome-layout";
 import { useState } from "react";
-import { Router, useRouter } from "next/router";
 import { Spinner } from "react-bootstrap";
-import api from "../utils/api";
+import api from "../../../utils/api";
 
-const SignIn = ({ setState }) => {
-  const router = useRouter();
+const SignUp = ({ setState }) => {
   const [user, setUser] = useState({
+    username: "",
     email: "",
     password: "",
+    passwordConfirm: "",
   });
   const [errorMsg, setErrorMsg] = useState("");
   const [isLoading, setIsLoading] = useState(false);
@@ -23,20 +23,22 @@ const SignIn = ({ setState }) => {
     event.preventDefault();
     setIsLoading(true);
 
-    const creds = {
+    const newUser = {
+      username: user.username,
       email: user.email,
       password: user.password,
     };
 
     try {
-      const res = await api.post("http://localhost:4000/api/auth/", creds, {
-        withCredentials: true,
-      });
-      router.push("/dashboard");
+      const response = await api.post(
+        "http://localhost:4000/api/users/",
+        newUser
+      );
+      setState("SignIn");
     } catch (ex) {
-      console.log(ex.response);
+      console.log(ex);
       if (ex.response?.status === 400) {
-        setErrorMsg("Incorrect username or password.");
+        setErrorMsg("Invalid user info.");
       } else {
         setErrorMsg("Something went wrong...");
       }
@@ -48,8 +50,17 @@ const SignIn = ({ setState }) => {
     <WelcomeLayout>
       <Container>
         <Title>linklist</Title>
-        <Subtitle>Sign in for better bookmarking</Subtitle>
+        <Subtitle>Sign up for better bookmarking</Subtitle>
         <form onSubmit={handleSubmit}>
+          <input
+            className="text-input-welcome"
+            type="text"
+            name="username"
+            placeholder="Username"
+            value={user.username}
+            onChange={handleChange}
+            required
+          ></input>
           <input
             className="text-input-welcome"
             type="email"
@@ -68,18 +79,27 @@ const SignIn = ({ setState }) => {
             onChange={handleChange}
             required
           ></input>
+          <input
+            className="text-input-welcome"
+            type="password"
+            name="passwordConfirm"
+            placeholder="Confirm password"
+            value={user.passwordConfirm}
+            onChange={handleChange}
+            required
+          ></input>
           <button type="submit" className="primary-button-full">
             {isLoading ? (
               <Spinner animation="border" id="spinner" />
             ) : (
-              <>Sign in</>
+              <>Sign up</>
             )}
           </button>
         </form>
         <p className="form-error">{errorMsg}</p>
         <Info>
-          Don't have an account?{" "}
-          <b onClick={() => setState("SignUp")}>Sign up</b>
+          Already have an account?{" "}
+          <b onClick={() => setState("SignIn")}>Sign in</b>
         </Info>
       </Container>
     </WelcomeLayout>
@@ -121,4 +141,16 @@ const Subtitle = styled.h2`
   margin: 0 0 2em 0;
 `;
 
-export default SignIn;
+const Input = styled.input`
+  width: 30em;
+  height: 3em;
+
+  padding: 0 2em;
+  margin: 0.5em 0;
+
+  background: #ffffff;
+  border: none;
+  border-radius: 56.5px;
+`;
+
+export default SignUp;

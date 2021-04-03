@@ -1,9 +1,9 @@
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
-import ListsPanel from "../components/lists-panel";
-import LinksWindow from "../components/links-window/links-window";
-import ListDetailPanel from "../components/list-detail-panel/list-detail-panel";
-import ErrorModal from "../components/error-modal";
+import ListsPanel from "./lists-panel/lists-panel";
+import LinksWindow from "./links-window/links-window";
+import ListDetailPanel from "./list-detail-panel/list-detail-panel";
+import ErrorModal from "../modals/error-modal/error-modal";
 import styled from "styled-components";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
@@ -11,8 +11,8 @@ import {
   setLists,
   setSelectedIndex,
   setErrorModalShow,
-} from "../redux/actions";
-import api from "../utils/api";
+} from "../../redux/actions";
+import api from "../../utils/api";
 
 export default function DashboardPage() {
   const [user, setUser] = useState({

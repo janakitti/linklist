@@ -1,10 +1,10 @@
 import styled from "styled-components";
 import { useEffect, useState } from "react";
-import ListItem from "./list-item/list-item";
-import NewListModal from "./new-list-modal";
+import ListItem from "../list-item/list-item";
+import NewListModal from "../../modals/new-list-modal/new-list-modal";
 import { useDispatch, useSelector } from "react-redux";
-import { setUser } from "../redux/actions";
-import api from "../utils/api";
+import { setUser } from "../../../redux/actions";
+import api from "../../../utils/api";
 
 const ListsPanel = ({ user, handleSelect, fetchLists }) => {
   const { lists, selectedIndex } = useSelector((state) => state.lists);
