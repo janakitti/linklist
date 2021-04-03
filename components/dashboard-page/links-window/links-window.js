@@ -39,14 +39,12 @@ const LinksWindow = ({ showErrorModal }) => {
   }
 
   const fetchLinks = async () => {
-    console.log(selectedList);
     try {
       if (selectedList?._id) {
         const res = await api.get("/links/" + selectedList._id, {
           method: "get",
           withCredentials: true,
         });
-        console.log(res);
         setLinks(res.data);
       } else {
         setLinks([]);

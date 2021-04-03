@@ -68,7 +68,6 @@ export default function DashboardPage() {
 
   // Fetch and select a specified list by index
   const fetchListsAndSetList = async (res, index) => {
-    console.log(res);
     lists[index] = res;
     dispatch(setLists(lists));
     dispatch(setSelectedIndex(index));

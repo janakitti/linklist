@@ -64,7 +64,6 @@ const ListDetailPanel = ({ fetchListsAndSetList, handleSelectAfterDelete }) => {
             }
           );
           await fetchListsAndSetList(res.data.privateList, selectedListIndex);
-          console.log(res);
         }
       } catch (ex) {
         console.log(ex);
