@@ -34,7 +34,6 @@ const SignIn = ({ setState }) => {
       });
       router.push("/dashboard");
     } catch (ex) {
-      console.log(ex.response);
       if (ex.response?.status === 400) {
         setErrorMsg("Incorrect username or password.");
       } else {
