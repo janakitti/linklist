@@ -9,3 +9,10 @@
   background: #ffffff;
   box-shadow: $box-shadow;
 }
+
+.no-links-graphic {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  height: 100%;
+}

@@ -5,6 +5,7 @@ import styled from "styled-components";
 import { useSelector, useDispatch } from "react-redux";
 import { setErrorMsg } from "../../../redux/actions";
 import api from "../../../utils/api";
+import Image from "next/image";
 
 const LinksWindow = ({ showErrorModal }) => {
   const dispatch = useDispatch();
@@ -123,7 +124,16 @@ const LinksWindow = ({ showErrorModal }) => {
           </form>
         </>
       ) : (
-        <></>
+          <div className="no-links-graphic">
+            <Image
+                src="/empty.svg"
+                alt="Picture of the author"
+                width={300}
+                height={300}
+            />
+            <h2 className="h-hint mt-4">Hm, it's a little empty here...</h2>
+          </div>
+
       )}
       <EditLinkModal
         show={editLinkModalShow}

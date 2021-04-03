@@ -126,14 +126,7 @@ const ListDetailPanel = ({ fetchListsAndSetList, handleSelectAfterDelete }) => {
               height={500}
             />
           )
-        ) : (
-          <Image
-            src="/empty.svg"
-            alt="Picture of the author"
-            width={500}
-            height={500}
-          />
-        )}
+        ) : (<></>)}
       </div>
       <>
         {selectedList._id ? (
@@ -162,9 +155,7 @@ const ListDetailPanel = ({ fetchListsAndSetList, handleSelectAfterDelete }) => {
               Delete
             </button>{" "}
           </>
-        ) : (
-          <h2 className="h-hint">Hm, it's a little empty here...</h2>
-        )}
+        ) : (<></>)}
       </>
 
       <Snackbar
