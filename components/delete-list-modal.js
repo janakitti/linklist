@@ -1,7 +1,7 @@
 import Modal from "react-bootstrap/Modal";
 import { useState } from "react";
 import styled from "styled-components";
-import axios from "axios";
+import api from "../utils/api";
 
 const DeleteListModal = ({ show, onDelete, list, onHide }) => {
   const [newList, setNewList] = useState("");
@@ -14,7 +14,7 @@ const DeleteListModal = ({ show, onDelete, list, onHide }) => {
     event.preventDefault();
     console.log(list);
     try {
-      const res = await axios.delete(
+      const res = await api.delete(
         "http://localhost:4000/api/lists/" + list._id,
         {
           withCredentials: true,

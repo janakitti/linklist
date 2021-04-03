@@ -1,9 +1,9 @@
 import Modal from "react-bootstrap/Modal";
 import { useState, useEffect } from "react";
 import styled from "styled-components";
-import axios from "axios";
 import { useSelector, useDispatch } from "react-redux";
 import { setErrorMsg } from "../redux/actions";
+import api from "../utils/api";
 
 const EditLinkModal = ({
   show,
@@ -33,7 +33,7 @@ const EditLinkModal = ({
 
   const handleDelete = async () => {
     try {
-      const res = await axios.delete(
+      const res = await api.delete(
         "http://localhost:4000/api/links/" + selectedLink.id,
         {
           withCredentials: true,
@@ -54,7 +54,7 @@ const EditLinkModal = ({
       return;
     }
     try {
-      const res = await axios.put(
+      const res = await api.put(
         "http://localhost:4000/api/links/" + selectedLink.id,
         editedLink,
         {

@@ -1,6 +1,5 @@
 import styled from "styled-components";
 import { useEffect, useState } from "react";
-import axios from "axios";
 import ListItem from "./list-item/list-item";
 import NewListModal from "./new-list-modal";
 import { useDispatch, useSelector } from "react-redux";

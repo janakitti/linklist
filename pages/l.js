@@ -3,7 +3,6 @@ import Col from "react-bootstrap/Col";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import PublicLinkItem from "../components/public-link-item/public-link-item";
-import axios from "axios";
 import styled from "styled-components";
 import api from "../utils/api";
 

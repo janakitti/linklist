@@ -1,9 +1,9 @@
 import styled from "styled-components";
 import WelcomeLayout from "./welcome-layout/welcome-layout";
 import { useState } from "react";
-import axios from "axios";
 import { Router, useRouter } from "next/router";
 import { Spinner } from "react-bootstrap";
+import api from "../utils/api";
 
 const SignIn = ({ setState }) => {
   const router = useRouter();
@@ -29,7 +29,7 @@ const SignIn = ({ setState }) => {
     };
 
     try {
-      const res = await axios.post("http://localhost:4000/api/auth/", creds, {
+      const res = await api.post("http://localhost:4000/api/auth/", creds, {
         withCredentials: true,
       });
       router.push("/dashboard");

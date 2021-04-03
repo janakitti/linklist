@@ -6,7 +6,6 @@ import ListDetailPanel from "../components/list-detail-panel/list-detail-panel";
 import ErrorModal from "../components/error-modal";
 import styled from "styled-components";
 import { useEffect, useState } from "react";
-import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
 import {
   setLists,

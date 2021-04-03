@@ -1,7 +1,7 @@
 import Modal from "react-bootstrap/Modal";
 import { useState } from "react";
 import styled from "styled-components";
-import axios from "axios";
+import api from "../utils/api";
 
 const NewListModal = ({ show, onAddNewList, onHide }) => {
   const [newList, setNewList] = useState("");
@@ -16,7 +16,7 @@ const NewListModal = ({ show, onAddNewList, onHide }) => {
       const name = {
         name: newList,
       };
-      const res = await axios.post("http://localhost:4000/api/lists", name, {
+      const res = await api.post("http://localhost:4000/api/lists", name, {
         withCredentials: true,
       });
       setNewList("");

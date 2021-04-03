@@ -2,7 +2,6 @@ import { useState, useEffect } from "react";
 import LinkItem from "../link-item/link-item";
 import EditLinkModal from "../edit-link-modal";
 import styled from "styled-components";
-import axios from "axios";
 import { useSelector, useDispatch } from "react-redux";
 import { setErrorMsg } from "../../redux/actions";
 import api from "../../utils/api";
@@ -67,7 +66,7 @@ const LinksWindow = ({ showErrorModal }) => {
       return;
     }
     try {
-      const res = await axios.post(
+      const res = await api.post(
         "http://localhost:4000/api/links/" + selectedList._id,
         newLink,
         {

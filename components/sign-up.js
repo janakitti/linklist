@@ -1,8 +1,8 @@
 import styled from "styled-components";
 import WelcomeLayout from "./welcome-layout/welcome-layout";
 import { useState } from "react";
-import axios from "axios";
 import { Spinner } from "react-bootstrap";
+import api from "../utils/api";
 
 const SignUp = ({ setState }) => {
   const [user, setUser] = useState({
@@ -30,7 +30,7 @@ const SignUp = ({ setState }) => {
     };
 
     try {
-      const response = await axios.post(
+      const response = await api.post(
         "http://localhost:4000/api/users/",
         newUser
       );

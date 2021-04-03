@@ -1,12 +1,12 @@
 import styled from "styled-components";
 import { useEffect, useState } from "react";
 import { Spinner } from "react-bootstrap";
-import axios from "axios";
 import Image from "next/image";
 import Snackbar from "@material-ui/core/Snackbar";
 import Slide from "@material-ui/core/Slide";
 import DeleteListModal from "../delete-list-modal";
 import { useSelector } from "react-redux";
+import api from "../../utils/api";
 
 const ListDetailPanel = ({ fetchListsAndSetList, handleSelectAfterDelete }) => {
   // Public link publishing states
@@ -40,7 +40,7 @@ const ListDetailPanel = ({ fetchListsAndSetList, handleSelectAfterDelete }) => {
     if (selectedList.publicListId) {
       try {
         if (selectedList) {
-          const res = await axios.put(
+          const res = await api.put(
             "http://localhost:4000/api/l/" + selectedList._id,
             {},
             {
@@ -55,7 +55,7 @@ const ListDetailPanel = ({ fetchListsAndSetList, handleSelectAfterDelete }) => {
     } else {
       try {
         if (selectedList) {
-          const res = await axios.post(
+          const res = await api.post(
             "http://localhost:4000/api/l/" + selectedList._id,
             {},
             {
