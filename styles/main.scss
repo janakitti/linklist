@@ -50,6 +50,10 @@
   @include button(auto, $primary);
 }
 
+.primary-button-auto:disabled {
+  background-color: $disabled;
+}
+
 .delete-button-auto {
   @include button(auto, $warn);
 }

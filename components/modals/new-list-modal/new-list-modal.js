@@ -48,8 +48,12 @@ const NewListModal = ({ show, onAddNewList, onHide }) => {
         ></input>
       </Modal.Body>
       <Modal.Footer>
-        <button onClick={handleSubmit} className="primary-button-auto">
-          Close
+        <button
+          onClick={handleSubmit}
+          className="primary-button-auto"
+          disabled={!newList}
+        >
+          Create
         </button>
       </Modal.Footer>
     </Modal>
