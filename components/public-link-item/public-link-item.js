@@ -1,10 +1,14 @@
 import styled from "styled-components";
+import { URL_SCHEME_PATTERN_CHECKER } from "../../utils/constants";
 
 const PublicLinkItem = ({ _id, label, url }) => {
   return (
-    <a href={url} target="_blank">
+    <a
+      href={"//" + url.replace(URL_SCHEME_PATTERN_CHECKER, "")}
+      target="_blank"
+    >
       <Item>
-        <Content>{label}</Content>
+        <Content>{url}</Content>
       </Item>
     </a>
   );
