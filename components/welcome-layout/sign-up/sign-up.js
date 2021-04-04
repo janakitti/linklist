@@ -23,27 +23,36 @@ const SignUp = ({ setState }) => {
     event.preventDefault();
     setIsLoading(true);
 
-    const newUser = {
-      username: user.username,
-      email: user.email,
-      password: user.password,
-    };
-
-    try {
-      const response = await api.post(
-        "http://localhost:4000/api/users/",
-        newUser
-      );
-      setState("SignIn");
-    } catch (ex) {
-      console.log(ex);
-      if (ex.response?.status === 400) {
-        setErrorMsg("Invalid user info.");
-      } else {
-        setErrorMsg("Something went wrong...");
+    if (user.username.length < 5 || user.username.length > 15) {
+      setErrorMsg("Username must be between 5 and 15 characters long.");
+    } else if (user.password !== user.passwordConfirm) {
+      setErrorMsg("Passwords do not match.");
+    } else if (user.password.length < 6) {
+      setErrorMsg("Password must be at least 6 characters long.");
+    } else if (user.password.length > 255) {
+      setErrorMsg("Password must be less than 255 characters long.");
+    } else {
+      const newUser = {
+        username: user.username,
+        email: user.email,
+        password: user.password,
+      };
+      try {
+        const response = await api.post(
+          "http://localhost:4000/api/users/",
+          newUser
+        );
+        setState("SignIn");
+      } catch (ex) {
+        console.log(ex);
+        if (ex.response?.status === 400) {
+          setErrorMsg("Invalid user info.");
+        } else {
+          setErrorMsg("Something went wrong...");
+        }
       }
-      setIsLoading(false);
     }
+    setIsLoading(false);
   }
 
   return (
