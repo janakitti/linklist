@@ -38,10 +38,7 @@ const SignUp = ({ setState }) => {
         password: user.password,
       };
       try {
-        const response = await api.post(
-          "http://localhost:4000/api/users/",
-          newUser
-        );
+        const response = await api.post("/users/", newUser);
         setState("SignIn");
       } catch (ex) {
         console.log(ex);

@@ -13,12 +13,9 @@ const DeleteListModal = ({ show, onDelete, list, onHide }) => {
   const handleDelete = async (event) => {
     event.preventDefault();
     try {
-      const res = await api.delete(
-        "http://localhost:4000/api/lists/" + list._id,
-        {
-          withCredentials: true,
-        }
-      );
+      const res = await api.delete("/lists/" + list._id, {
+        withCredentials: true,
+      });
       await onDelete();
     } catch (ex) {
       console.log(ex);

@@ -41,7 +41,7 @@ const ListDetailPanel = ({ fetchListsAndSetList, handleSelectAfterDelete }) => {
       try {
         if (selectedList) {
           const res = await api.put(
-            "http://localhost:4000/api/l/" + selectedList._id,
+            "/l/" + selectedList._id,
             {},
             {
               method: "put",
@@ -56,7 +56,7 @@ const ListDetailPanel = ({ fetchListsAndSetList, handleSelectAfterDelete }) => {
       try {
         if (selectedList) {
           const res = await api.post(
-            "http://localhost:4000/api/l/" + selectedList._id,
+            "/l/" + selectedList._id,
             {},
             {
               method: "post",
@@ -126,7 +126,9 @@ const ListDetailPanel = ({ fetchListsAndSetList, handleSelectAfterDelete }) => {
               height={500}
             />
           )
-        ) : (<></>)}
+        ) : (
+          <></>
+        )}
       </div>
       <>
         {selectedList._id ? (
@@ -155,7 +157,9 @@ const ListDetailPanel = ({ fetchListsAndSetList, handleSelectAfterDelete }) => {
               Delete
             </button>{" "}
           </>
-        ) : (<></>)}
+        ) : (
+          <></>
+        )}
       </>
 
       <Snackbar

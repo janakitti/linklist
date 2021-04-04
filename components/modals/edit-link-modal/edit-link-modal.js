@@ -34,12 +34,9 @@ const EditLinkModal = ({
 
   const handleDelete = async () => {
     try {
-      const res = await api.delete(
-        "http://localhost:4000/api/links/" + selectedLink.id,
-        {
-          withCredentials: true,
-        }
-      );
+      const res = await api.delete("/links/" + selectedLink.id, {
+        withCredentials: true,
+      });
       onHide();
       fetchLinks();
     } catch (ex) {
@@ -56,13 +53,9 @@ const EditLinkModal = ({
       dispatch(setErrorMsg("Please use a valid URL!"));
     } else {
       try {
-        const res = await api.put(
-          "http://localhost:4000/api/links/" + selectedLink.id,
-          editedLink,
-          {
-            withCredentials: true,
-          }
-        );
+        const res = await api.put("/links/" + selectedLink.id, editedLink, {
+          withCredentials: true,
+        });
         onHide();
         fetchLinks();
       } catch (ex) {

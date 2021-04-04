@@ -16,7 +16,7 @@ const NewListModal = ({ show, onAddNewList, onHide }) => {
       const name = {
         name: newList,
       };
-      const res = await api.post("http://localhost:4000/api/lists", name, {
+      const res = await api.post("/lists", name, {
         withCredentials: true,
       });
       setNewList("");

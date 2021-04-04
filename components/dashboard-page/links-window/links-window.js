@@ -67,13 +67,9 @@ const LinksWindow = ({ showErrorModal }) => {
       dispatch(setErrorMsg("Please use a valid URL!"));
     } else {
       try {
-        const res = await api.post(
-          "http://localhost:4000/api/links/" + selectedList._id,
-          newLink,
-          {
-            withCredentials: true,
-          }
-        );
+        const res = await api.post("/links/" + selectedList._id, newLink, {
+          withCredentials: true,
+        });
         setNewLink({ label: "", url: "" });
         fetchLinks();
       } catch (ex) {

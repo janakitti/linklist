@@ -29,7 +29,7 @@ const SignIn = ({ setState }) => {
     };
 
     try {
-      const res = await api.post("http://localhost:4000/api/auth/", creds, {
+      const res = await api.post("/auth/", creds, {
         withCredentials: true,
       });
       router.push("/dashboard");
