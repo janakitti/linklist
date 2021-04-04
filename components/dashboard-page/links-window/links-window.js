@@ -6,6 +6,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { setErrorMsg } from "../../../redux/actions";
 import api from "../../../utils/api";
 import Image from "next/image";
+import { URL_PATTERN_CHECKER } from "../../../utils/constants";
 
 const LinksWindow = ({ showErrorModal }) => {
   const dispatch = useDispatch();
@@ -60,22 +61,24 @@ const LinksWindow = ({ showErrorModal }) => {
     event.preventDefault();
     if (newLink.label?.length < 5) {
       dispatch(
-        setErrorMsg("Your link label has got to be at least 5 characters long!")
+        setErrorMsg("Your link label needs to be at least 5 characters long!")
       );
-      return;
-    }
-    try {
-      const res = await api.post(
-        "http://localhost:4000/api/links/" + selectedList._id,
-        newLink,
-        {
-          withCredentials: true,
-        }
-      );
-      setNewLink({ label: "", url: "" });
-      fetchLinks();
-    } catch (ex) {
-      console.log(ex);
+    } else if (!URL_PATTERN_CHECKER.test(newLink.url)) {
+      dispatch(setErrorMsg("Please use a valid URL!"));
+    } else {
+      try {
+        const res = await api.post(
+          "http://localhost:4000/api/links/" + selectedList._id,
+          newLink,
+          {
+            withCredentials: true,
+          }
+        );
+        setNewLink({ label: "", url: "" });
+        fetchLinks();
+      } catch (ex) {
+        console.log(ex);
+      }
     }
   };
 
@@ -114,7 +117,7 @@ const LinksWindow = ({ showErrorModal }) => {
               onChange={handleChange}
             ></Input>
             <Input
-              type="url"
+              type="text"
               name="url"
               placeholder="URL"
               value={newLink.url}
@@ -124,16 +127,15 @@ const LinksWindow = ({ showErrorModal }) => {
           </form>
         </>
       ) : (
-          <div className="no-links-graphic">
-            <Image
-                src="/empty.svg"
-                alt="Picture of the author"
-                width={300}
-                height={300}
-            />
-            <h2 className="h-hint mt-4">Hm, it's a little empty here...</h2>
-          </div>
-
+        <div className="no-links-graphic">
+          <Image
+            src="/empty.svg"
+            alt="Picture of the author"
+            width={300}
+            height={300}
+          />
+          <h2 className="h-hint mt-4">Hm, it's a little empty here...</h2>
+        </div>
       )}
       <EditLinkModal
         show={editLinkModalShow}
