@@ -4,6 +4,7 @@ import styled from "styled-components";
 import { useSelector, useDispatch } from "react-redux";
 import { setErrorMsg } from "../../../redux/actions";
 import api from "../../../utils/api";
+import { URL_PATTERN_CHECKER } from "../../../utils/constants";
 
 const EditLinkModal = ({
   show,
@@ -49,22 +50,24 @@ const EditLinkModal = ({
   const handleEdit = async () => {
     if (editedLink.label?.length < 5) {
       dispatch(
-        setErrorMsg("Your link label has got to be at least 5 characters long!")
+        setErrorMsg("Your link label needs to be at least 5 characters long!")
       );
-      return;
-    }
-    try {
-      const res = await api.put(
-        "http://localhost:4000/api/links/" + selectedLink.id,
-        editedLink,
-        {
-          withCredentials: true,
-        }
-      );
-      onHide();
-      fetchLinks();
-    } catch (ex) {
-      console.log(ex);
+    } else if (!URL_PATTERN_CHECKER.test(editedLink.url)) {
+      dispatch(setErrorMsg("Please use a valid URL!"));
+    } else {
+      try {
+        const res = await api.put(
+          "http://localhost:4000/api/links/" + selectedLink.id,
+          editedLink,
+          {
+            withCredentials: true,
+          }
+        );
+        onHide();
+        fetchLinks();
+      } catch (ex) {
+        console.log(ex);
+      }
     }
   };
 
