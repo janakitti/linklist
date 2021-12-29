@@ -5,19 +5,13 @@ module.exports = {
   ],
   theme: {
     colors: {
-      blue: "#1fb6ff",
-      purple: "#7e5bef",
-      pink: "#ff49db",
-      orange: "#ff7849",
-      green: "#13ce66",
-      yellow: "#ffc82c",
-      "gray-dark": "#273444",
-      gray: "#8492a6",
-      "gray-light": "#d3dce6",
-    },
-    fontFamily: {
-      sans: ["Graphik", "sans-serif"],
-      serif: ["Merriweather", "serif"],
+      gold: "#dec800",
+      "gold-dark": "#c2af00",
+      red: "#f84545",
+      light: "#f2f2f2",
+      dark: "#373737",
+      hint: "#bbbbbb",
+      white: "#ffffff",
     },
     extend: {
       spacing: {
@@ -26,6 +20,10 @@ module.exports = {
       },
       borderRadius: {
         "4xl": "2rem",
+      },
+      fontFamily: {
+        sans: ["Poppins", "sans-serif"],
+        serif: ["Merriweather", "serif"],
       },
     },
   },
