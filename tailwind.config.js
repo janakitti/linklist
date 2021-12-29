@@ -5,8 +5,8 @@ module.exports = {
   ],
   theme: {
     colors: {
-      gold: "#dec800",
-      "gold-dark": "#c2af00",
+      primary: "#dec800",
+      "primary-dark": "#c2af00",
       red: "#f84545",
       light: "#f2f2f2",
       dark: "#373737",
@@ -24,6 +24,14 @@ module.exports = {
       fontFamily: {
         sans: ["Poppins", "sans-serif"],
         serif: ["Merriweather", "serif"],
+      },
+      spacing: {
+        sm: "1.5",
+        md: "2.5",
+      },
+      animation: {
+        bounce200: "bounce 1s infinite 200ms",
+        bounce400: "bounce 1s infinite 400ms",
       },
     },
   },
