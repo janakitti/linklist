@@ -1,9 +1,10 @@
 import axios from "axios";
 import { Dispatch, SetStateAction, useState } from "react";
 import { config } from "../utils/config";
-import { Color } from "../utils/theme";
+import { Color, Size } from "../utils/theme";
 import Button from "./Button";
 import Input from "./Input";
+import Loader from "./Loader";
 
 export interface ISignUpProps {
   setWelcomeMode: Dispatch<SetStateAction<string>>;
@@ -85,8 +86,12 @@ const SignUp: React.FC<ISignUpProps> = ({ setWelcomeMode }) => {
           onChange={handleChange}
           required
         />
-        <Button color={Color.primary} onClick={() => {}}>
-          {isLoading ? <></> : <>Sign up</>}
+        <Button color={"primary"} onClick={() => {}}>
+          {isLoading ? (
+            <Loader color={Color.white} size={Size.md} />
+          ) : (
+            <>Sign up</>
+          )}
         </Button>
       </form>
       <p className="form-error">{errorMsg}</p>
