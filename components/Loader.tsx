@@ -9,12 +9,20 @@ const Loader: React.FC<IButtonProps> = ({ color, size }) => {
   let sizeClasses;
   switch (size) {
     case Size.md:
-      sizeClasses = "h-2.5 w-2.5 ";
+      sizeClasses = "h-2.5 w-2.5";
+      break;
+    case Size.lg:
+      sizeClasses = "h-3.5 w-3.5";
+      break;
   }
   let colorClasses;
   switch (color) {
+    case Color.primary:
+      colorClasses = "bg-primary";
+      break;
     case Color.white:
       colorClasses = "bg-white";
+      break;
   }
   return (
     <div className="flex">
