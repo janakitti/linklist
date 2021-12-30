@@ -36,7 +36,7 @@ const SignUp: React.FC<ISignUpProps> = ({ setWelcomeMode }) => {
     };
 
     try {
-      await axios.post(config.apiUrl + "/users", newUser);
+      await axios.post("/api/sign-up", { param: newUser });
       setWelcomeMode("SignIn");
     } catch (ex: any) {
       console.log(ex);
