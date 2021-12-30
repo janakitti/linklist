@@ -71,7 +71,8 @@ const SignUp: React.FC = () => {
       </form>
       <p className="text-sm text-warn my-2">{errorMsg}</p>
       <p className="text-sm text-dark my-2">
-        Don't have an account? <b onClick={() => router.push("/")}>Sign up</b>
+        {"Don't have an account?"}{" "}
+        <b onClick={() => router.push("/")}>Sign up</b>
       </p>
     </div>
   );
