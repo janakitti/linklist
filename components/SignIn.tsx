@@ -1,11 +1,8 @@
 import axios from "axios";
 import { useRouter } from "next/router";
 import { Dispatch, SetStateAction, useState } from "react";
-import { config } from "../utils/config";
-import { Color, Size } from "../utils/theme";
 import Button from "./Button";
 import Input from "./Input";
-import Loader from "./Loader";
 
 const SignUp: React.FC = () => {
   const [user, setUser] = useState({
@@ -65,12 +62,8 @@ const SignUp: React.FC = () => {
           onChange={handleChange}
           required
         />
-        <Button color={"primary"} onClick={() => {}}>
-          {isLoading ? (
-            <Loader color={Color.white} size={Size.md} />
-          ) : (
-            <>Sign in</>
-          )}
+        <Button color={"primary"} onClick={() => {}} isLoading={isLoading}>
+          Sign in
         </Button>
       </form>
       <p className="text-sm text-warn my-2">{errorMsg}</p>
