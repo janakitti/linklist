@@ -9,10 +9,8 @@ import Loader from "./Loader";
 
 const SignUp: React.FC = () => {
   const [user, setUser] = useState({
-    username: "",
     email: "",
     password: "",
-    passwordConfirm: "",
   });
   const [errorMsg, setErrorMsg] = useState("");
   const [isLoading, setIsLoading] = useState(false);
@@ -27,24 +25,18 @@ const SignUp: React.FC = () => {
     event.preventDefault();
     setIsLoading(true);
 
-    if (user.password != user.passwordConfirm) {
-      setErrorMsg("Passwords must match.");
-      setIsLoading(false);
-      return;
-    }
-    const newUser = {
-      username: user.username,
+    const credentials = {
       email: user.email,
       password: user.password,
     };
 
     try {
-      let a = await axios.post("/api/sign-up", { param: newUser });
+      let a = await axios.post("/api/sign-in", { param: credentials });
       setIsLoading(false);
-      router.push("/sign-in");
+      router.push("/dashboard");
     } catch (ex: any) {
       if (ex?.response?.status === 400) {
-        setErrorMsg("Invalid user info.");
+        setErrorMsg("Incorrect username or password.");
       } else {
         setErrorMsg("Something went wrong...");
       }
@@ -55,16 +47,8 @@ const SignUp: React.FC = () => {
   return (
     <div className="flex flex-col items-center justify-center h-full">
       <h1 className="text-3xl font-bold">linklist</h1>
-      <h2 className="text-sm text-dark my-2">Sign up for better bookmarking</h2>
+      <h2 className="text-sm text-dark my-2">Sign in for better bookmarking</h2>
       <form onSubmit={handleSubmit} className="flex flex-col w-1/2">
-        <Input
-          type="text"
-          name="username"
-          placeholder="Username"
-          value={user.username}
-          onChange={handleChange}
-          required
-        />
         <Input
           type="email"
           name="email"
@@ -81,26 +65,17 @@ const SignUp: React.FC = () => {
           onChange={handleChange}
           required
         />
-        <Input
-          type="password"
-          name="passwordConfirm"
-          placeholder="Confirm password"
-          value={user.passwordConfirm}
-          onChange={handleChange}
-          required
-        />
         <Button color={"primary"} onClick={() => {}}>
           {isLoading ? (
             <Loader color={Color.white} size={Size.md} />
           ) : (
-            <>Sign up</>
+            <>Sign in</>
           )}
         </Button>
       </form>
       <p className="text-sm text-warn my-2">{errorMsg}</p>
       <p className="text-sm text-dark my-2">
-        Already have an account?{" "}
-        <b onClick={() => router.push("/sign-in")}>Sign in</b>
+        Don't have an account? <b onClick={() => router.push("/")}>Sign up</b>
       </p>
     </div>
   );
