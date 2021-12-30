@@ -1,6 +1,7 @@
 import axios from "axios";
 import { useRouter } from "next/router";
 import { Dispatch, SetStateAction, useState } from "react";
+import { config } from "../utils/config";
 import Button from "./Button";
 import Input from "./Input";
 
@@ -28,7 +29,9 @@ const SignUp: React.FC = () => {
     };
 
     try {
-      let a = await axios.post("/api/sign-in", { param: credentials });
+      let a = await axios.post(config.apiUrl + "/auth", credentials, {
+        withCredentials: true,
+      });
       setIsLoading(false);
       router.push("/dashboard");
     } catch (ex: any) {
