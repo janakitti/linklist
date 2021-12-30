@@ -1,4 +1,5 @@
 import axios from "axios";
+import { useRouter } from "next/router";
 import { Dispatch, SetStateAction, useState } from "react";
 import { config } from "../utils/config";
 import { Color, Size } from "../utils/theme";
@@ -19,6 +20,7 @@ const SignUp: React.FC<ISignUpProps> = ({ setWelcomeMode }) => {
   });
   const [errorMsg, setErrorMsg] = useState("");
   const [isLoading, setIsLoading] = useState(false);
+  const router = useRouter();
 
   function handleChange(event: React.ChangeEvent<HTMLInputElement>) {
     const { name, value } = event.target;
@@ -29,6 +31,11 @@ const SignUp: React.FC<ISignUpProps> = ({ setWelcomeMode }) => {
     event.preventDefault();
     setIsLoading(true);
 
+    if (user.password != user.passwordConfirm) {
+      setErrorMsg("Passwords must match.");
+      setIsLoading(false);
+      return;
+    }
     const newUser = {
       username: user.username,
       email: user.email,
@@ -36,10 +43,11 @@ const SignUp: React.FC<ISignUpProps> = ({ setWelcomeMode }) => {
     };
 
     try {
-      await axios.post("/api/sign-up", { param: newUser });
+      let a = await axios.post("/api/sign-up", { param: newUser });
+      setIsLoading(false);
       setWelcomeMode("SignIn");
+      router.push("/sign-in");
     } catch (ex: any) {
-      console.log(ex);
       if (ex?.response?.status === 400) {
         setErrorMsg("Invalid user info.");
       } else {
@@ -94,7 +102,7 @@ const SignUp: React.FC<ISignUpProps> = ({ setWelcomeMode }) => {
           )}
         </Button>
       </form>
-      <p className="form-error">{errorMsg}</p>
+      <p className="text-sm text-warn my-2">{errorMsg}</p>
       <p className="text-sm text-dark my-2">
         Already have an account?{" "}
         <b onClick={() => setWelcomeMode("SignIn")}>Sign in</b>
