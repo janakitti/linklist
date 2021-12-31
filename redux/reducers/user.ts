@@ -1,4 +1,4 @@
-import { IAction, SET_USER } from "../actionTypes";
+import { IAction, RESET_USER, SET_USER } from "../actionTypes";
 
 export interface IUserState {
   username: string;
@@ -17,9 +17,10 @@ export default function userReducer(
   action: IAction
 ) {
   switch (action.type) {
-    case SET_USER: {
+    case SET_USER:
       return action.payload;
-    }
+    case RESET_USER:
+      return initialState;
     default:
       return state;
   }
