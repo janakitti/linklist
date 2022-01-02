@@ -25,13 +25,31 @@ const VerifyPage: NextPage = () => {
     })();
   });
   return (
-    <>
+    <div className="w-screen h-screen flex flox-col items-center justify-center">
       {isLoading ? (
         <Loader color={Color.primary} size={Size.lg} />
       ) : (
-        <>{isVerified ? <h1>Verified</h1> : <h1>Uh Oh</h1>}</>
+        <>
+          {!isVerified ? (
+            <div className="flex flex-col items-center justify-center w-full h-full">
+              <h1 className="text-lg">Your account has been verified!</h1>
+              <br></br>
+              <p className="text-sm text-dark my-2">
+                <b
+                  onClick={() => router.push("/sign-in")}
+                  className="cursor-pointer hover:text-darker"
+                >
+                  Sign in
+                </b>{" "}
+                once you have verified your account.
+              </p>
+            </div>
+          ) : (
+            <h1>Oops! We're unable to verify account.</h1>
+          )}
+        </>
       )}
-    </>
+    </div>
   );
 };
 
