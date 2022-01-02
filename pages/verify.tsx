@@ -45,7 +45,7 @@ const VerifyPage: NextPage = () => {
               </p>
             </div>
           ) : (
-            <h1>Oops! We're unable to verify account.</h1>
+            <h1>{"Oops! We're unable to verify account."}</h1>
           )}
         </>
       )}
