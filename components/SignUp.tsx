@@ -4,7 +4,11 @@ import { Dispatch, SetStateAction, useState } from "react";
 import Button from "./Button";
 import Input from "./Input";
 
-const SignUp: React.FC = () => {
+export interface ISignUpProps {
+  setEmail: Dispatch<SetStateAction<string>>;
+}
+
+const SignUp: React.FC<ISignUpProps> = ({ setEmail }) => {
   const [user, setUser] = useState({
     username: "",
     email: "",
@@ -38,7 +42,7 @@ const SignUp: React.FC = () => {
     try {
       let a = await axios.post("/api/sign-up", { param: newUser });
       setIsLoading(false);
-      router.push("/sign-in");
+      setEmail(user.email);
     } catch (ex: any) {
       if (ex?.response?.status === 400) {
         setErrorMsg("Invalid user info.");

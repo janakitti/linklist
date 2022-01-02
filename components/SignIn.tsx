@@ -36,7 +36,7 @@ const SignUp: React.FC = () => {
       router.push("/dashboard");
     } catch (ex: any) {
       if (ex?.response?.status === 400) {
-        setErrorMsg("Incorrect username or password.");
+        setErrorMsg(ex.response.data);
       } else {
         setErrorMsg("Something went wrong...");
       }
